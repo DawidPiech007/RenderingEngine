@@ -1,21 +1,20 @@
 ﻿#include <iostream>
 #include "Vector3.hpp"
+#include "Ray.hpp"
 
 using namespace std;
 
 int main()
 {
-    Vector3 a(1.0f, 0.0f, 0.0f);
-    Vector3 b(1.0f, 0.0f, 0.0f);
-    cout << "a\n" << a.ToString();
-    cout << "b\n" << b.ToString();
+    Vector3 a(2.0f, 3.0f, 4.0f);
+    Vector3 b(5.0f, 6.0f, 7.0f);
+    Vector3 c(5.0f, 6.0f, 7.0f);
 
-    float dot = Vector3::Dot(a, b);
-    Vector3 cross = Vector3::Cross(a,b);
+    c = c.Normalize();
 
-    cout << "dot\n  " << dot << "\n";
-    cout << "cross\n" << cross.ToString();
-    
+    Ray ray(a, b);
+
+    cout << "normalized\n" << c.ToString() << "\n";
 
     return 0;
 }

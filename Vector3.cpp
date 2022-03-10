@@ -26,6 +26,7 @@ Vector3& Vector3::operator-=(Vector3& b)
 	return *this;
 }
 
+/*
 Vector3& Vector3::operator+=(Vector3 b)
 {
 	this->x += b.x;
@@ -40,7 +41,7 @@ Vector3& Vector3::operator-=(Vector3 b)
 	this->y -= b.y;
 	this->z -= b.z;
 	return *this;
-}
+}*/
 
 Vector3& Vector3::operator*=(float k)
 {
@@ -77,7 +78,6 @@ Vector3 Vector3::operator*(float k)
 Vector3 Vector3::operator/(float k)
 {
 	return Vector3(x / k, y / k, z / k);
-
 }
 
 Vector3 Vector3::operator-()
@@ -105,7 +105,7 @@ float Vector3::Magnitude(Vector3& a)
 	return sqrtf((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
 }
 
-float Vector3::SquerMagnitude(Vector3& a)
+float Vector3::SqrMagnitude(Vector3& a)
 {
 	return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
 }
@@ -115,10 +115,21 @@ float Vector3::Magnitude()
 	return sqrtf((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
 }
 
-float Vector3::SquerMagnitude()
+float Vector3::SqrMagnitude()
 {
 	return (this->x * this->x) + (this->y * this->y) + (this->z * this->z);
 }
+
+Vector3 Vector3::Normalize(Vector3 &a)
+{
+	return a/Magnitude(a);
+}
+
+Vector3 Vector3::Normalize()
+{
+	return *this/Magnitude();
+}
+
 
 std::string Vector3::ToString()
 {

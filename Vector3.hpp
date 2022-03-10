@@ -11,8 +11,8 @@ public:
     Vector3& operator += (Vector3& b);
     Vector3& operator -= (Vector3& b);
            
-    Vector3& operator += (Vector3 b);
-    Vector3& operator -= (Vector3 b);
+    //Vector3& operator += (Vector3 b);
+    //Vector3& operator -= (Vector3 b);
     Vector3& operator *= (float k);
     Vector3& operator /= (float k);
 
@@ -28,10 +28,13 @@ public:
     static float Dot(Vector3& a, Vector3& b);
     
     static float Magnitude(Vector3& a);
-    static float SquerMagnitude(Vector3& a);
+    static float SqrMagnitude(Vector3& a);
 
     float Magnitude();
-    float SquerMagnitude();
+    float SqrMagnitude();
+
+    static Vector3 Normalize(Vector3 &a);
+    Vector3 Normalize();
 
     std::string ToString();
 

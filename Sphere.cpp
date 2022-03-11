@@ -4,15 +4,22 @@
 
 using namespace std;
 
-Sphere::Sphere(Vector3& c, float r): r(r)
+Sphere::Sphere(float cx, float cy, float cz, float r)
+{
+	this->c = new Vector3(cx, cy, cz);
+	this->r = r;
+}
+
+Sphere::Sphere(Vector3& c, float r)
 {
 	this->c = new Vector3(c.x, c.y, c.z);
+	this->r = r;
 }
 
 Sphere::Sphere()
 {
 	this->c = new Vector3();
-	r = 0;
+	this->r = 0;
 }
 
 list<Vector3*> Sphere::Intersect(Ray& ray)
@@ -24,9 +31,9 @@ list<Vector3*> Sphere::Intersect(Ray& ray)
 	float a = Vector3::Dot(ray.direction, ray.direction);
 	float b = Vector3::Dot(d2, offset);
 	float c = Vector3::Dot(offset, offset) - (r * r);
-	float det = (b * b) - 4 * (a + c);
+	float det = (b * b) - 4 * (a * c);
 
-	if ( fabs(det) > FLT_EPSILON) // "det == 0" // delta = 0 oznacza 1 przeciecie
+	if ( fabs(det) < FLT_EPSILON) // "det == 0" // delta = 0 oznacza 1 przeciecie
 	{
 		float t = (-b) / (2 * a);
 		if (t >= 0 && t <= 1) // Czy punkt przeciecia jest pomiendzy poczatkiem a koncem promienia

@@ -16,7 +16,7 @@ public:
     Vector3& operator *= (float k);
     Vector3& operator /= (float k);
 
-    Vector3 operator + (Vector3 &b);
+    Vector3 operator + (Vector3& b);
     Vector3 operator - (Vector3& b);
     Vector3 operator * (float k);
     Vector3 operator / (float k);

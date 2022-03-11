@@ -1,5 +1,6 @@
 #pragma once
 
+#include <list>
 // predekralacje klas 
 class Vector3;
 class Ray;
@@ -7,6 +8,6 @@ class Ray;
 class Geometry
 {
 public:
-	virtual Vector3* Intersect(Ray& ray);
+	virtual std::list<Vector3*> Intersect(Ray& ray);
 };
 

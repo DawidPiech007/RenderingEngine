@@ -6,31 +6,31 @@ using namespace std;
 
 Sphere::Sphere(float cx, float cy, float cz, float r)
 {
-	this->c = new Vector3(cx, cy, cz);
-	this->r = r;
+	this->center = Vector3(cx, cy, cz);
+	this->radius = r;
 }
 
-Sphere::Sphere(Vector3& c, float r)
+Sphere::Sphere(Vector3 c, float r)
 {
-	this->c = new Vector3(c.x, c.y, c.z);
-	this->r = r;
+	this->center = c;
+	this->radius = r;
 }
 
 Sphere::Sphere()
 {
-	this->c = new Vector3();
-	this->r = 0;
+	this->center = Vector3();
+	this->radius = 0;
 }
 
-list<Vector3*> Sphere::Intersect(Ray& ray)
+vector<Vector3*> Sphere::Intersect(Ray& ray)
 {
-	list<Vector3*> contactPoints; // lista puktow przeciecia (zwracana na koncu)
+	vector<Vector3*> contactPoints; // lista puktow przeciecia (zwracana na koncu)
 
-	Vector3 offset = ray.origin - *c;
+	Vector3 offset = ray.origin - center;
 	Vector3 d2 = ray.direction * 2.0f;
 	float a = Vector3::Dot(ray.direction, ray.direction);
 	float b = Vector3::Dot(d2, offset);
-	float c = Vector3::Dot(offset, offset) - (r * r);
+	float c = Vector3::Dot(offset, offset) - (radius * radius);
 	float det = (b * b) - 4 * (a * c);
 
 	if ( fabs(det) < FLT_EPSILON) // "det == 0" // delta = 0 oznacza 1 przeciecie
@@ -52,39 +52,3 @@ list<Vector3*> Sphere::Intersect(Ray& ray)
 
 	return contactPoints;
 }
-
-/*
-int Sphere::Intersect( Ray& a_Ray, float& a_Dist )
-{
-	vector3 v = a_Ray.GetOrigin() - m_Centre;
-	float b = -DOT( v, a_Ray.GetDirection() );
-	float det = (b * b) - DOT( v, v ) + m_SqRadius;
-	int retval = MISS;
-	if (det > 0)
-	{
-		det = sqrtf( det );
-		float i1 = b - det;
-		float i2 = b + det;
-		if (i2 > 0)
-		{
-			if (i1 < 0)
-			{
-				if (i2 < a_Dist)
-				{
-					a_Dist = i2;
-					retval = INPRIM;
-				}
-			}
-			else
-			{
-				if (i1 < a_Dist)
-				{
-					a_Dist = i1;
-					retval = HIT;
-				}
-			}
-		}
-	}
-	return retval;
-}
-*/

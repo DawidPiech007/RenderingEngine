@@ -25,11 +25,10 @@ int main()
     Vector3 d1(0.0f, 0.0f, 40.0f);
     Ray r1(o1, d1);
 
-    list<Vector3*> contactPoints = s.Intersect(r1);
+    vector<Vector3*> contactPoints = s.Intersect(r1);
 
-    cout << "contactPoints1\n" << contactPoints.front()->ToString() << "\n";
-    contactPoints.pop_front();
-    cout << "contactPoints2\n" << contactPoints.front()->ToString() << "\n";
+    cout << "contactPoints1\n" << contactPoints[0]->ToString() << "\n";
+    cout << "contactPoints2\n" << contactPoints[1]->ToString() << "\n";
 
     return 0;
 }

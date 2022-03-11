@@ -20,15 +20,28 @@ int main()
 
 
     Sphere s(0.0f, 0.0f, 0.0f, 10.0f);
+    Ray r1(Vector3(0.0f, 0.0f, -20.0f), Vector3(0.0f, 0.0f, 40.0f));
+    Ray r2(Vector3(0.0f, 0.0f, -20.0f), Vector3(0.0f, 100.0f, 0.0f));
+    Ray r3(Vector3(0.0f, 10.0f, -20.0f), Vector3(0.0f, 0.0f, 40.0f));
+    Ray r4(Vector3(0.0f, 0.0f, 0.0f), Vector3(100.0f, 100.0f, 100.0f));
 
-    Vector3 o1(0.0f, 0.0f, -20.0f);
-    Vector3 d1(0.0f, 0.0f, 40.0f);
-    Ray r1(o1, d1);
+    vector<Vector3*> contactPoints_r1_s = s.Intersect(r1);
+    vector<Vector3*> contactPoints_r2_s = s.Intersect(r2);
+    vector<Vector3*> contactPoints_r3_s = s.Intersect(r3);
+    vector<Vector3*> contactPoints_r4_s = s.Intersect(r4);
 
-    vector<Vector3*> contactPoints = s.Intersect(r1);
+    cout << "contactPoints_r1_s (" << contactPoints_r1_s.size() << ")\n";
+    cout << contactPoints_r1_s[0]->ToString() << "\n";
+    cout << contactPoints_r1_s[1]->ToString() << "\n";
 
-    cout << "contactPoints1\n" << contactPoints[0]->ToString() << "\n";
-    cout << "contactPoints2\n" << contactPoints[1]->ToString() << "\n";
+    cout << "contactPoints_r2_s (" << contactPoints_r2_s.size() << ")\n";
+    cout << "\n";
+
+    cout << "contactPoints_r3_s (" << contactPoints_r3_s.size() << ")\n";
+    cout << contactPoints_r3_s[0]->ToString() << "\n";
+
+    cout << "contactPoints_r4_s (" << contactPoints_r4_s.size() << ")\n";
+    cout << contactPoints_r4_s[0]->ToString() << "\n";
 
     return 0;
 }

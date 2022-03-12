@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{62225007-A5A1-49D5-A0F1-BD891E6BA64F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>DwarfEngine2</RootNamespace>
+    <RootNamespace>RenderingEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DwarfEngine2.cpp" />
+    <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Ray.cpp" />

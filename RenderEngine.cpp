@@ -2,6 +2,7 @@
 #include "Vector3.hpp"
 #include "Ray.hpp"
 #include "Sphere.hpp"
+#include "Plane.hpp"
 
 using namespace std;
 
@@ -42,6 +43,13 @@ int main()
 
     cout << "contactPoints_r4_s (" << contactPoints_r4_s.size() << ")\n";
     cout << contactPoints_r4_s[0]->ToString() << "\n";
+
+    Vector3 q1(0.0f, 0.0f, 0.0f);
+    Vector3 q2(0.0f, 1.0f, 1.0f);
+
+    Plane plane(q1, q2);
+    vector<Vector3*> contactPoints_r1_p = plane.Intersect(r2);
+    cout << contactPoints_r1_p[0]->ToString() << "\n";
 
     return 0;
 }

@@ -19,7 +19,6 @@ std::vector<Vector3*> Plane::Intersect(Ray& ray)
 	else
 	{
 		float t = dot1 / dot2;
-		std::cout << "Perpendicular"<<t<<" \n";
 		if (t > 0 && t < 1) 
 		{
 			contactPoints.push_back(new Vector3(ray.RayStep(t)));

@@ -48,6 +48,7 @@ int main()
     Vector3 q2(0.0f, 1.0f, 1.0f);
 
     Plane plane(q1, q2);
+    //Ray r2(Vector3(0.0f, 0.0f, -20.0f), Vector3(0.0f, 100.0f, -20.0f));
     vector<Vector3*> contactPoints_r1_p = plane.Intersect(r2);
     cout << contactPoints_r1_p[0]->ToString() << "\n";
 

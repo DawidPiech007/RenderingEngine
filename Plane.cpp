@@ -19,7 +19,7 @@ std::vector<Vector3*> Plane::Intersect(Ray& ray)
 	else
 	{
 		float t = dot1 / dot2;
-		if (t > 0 && t < 1) 
+		if (t > 0) 
 		{
 			contactPoints.push_back(new Vector3(ray.RayStep(t)));
 		}

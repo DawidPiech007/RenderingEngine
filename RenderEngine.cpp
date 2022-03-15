@@ -3,6 +3,10 @@
 #include "Ray.hpp"
 #include "Sphere.hpp"
 #include "Plane.hpp"
+#include "Buffer.hpp"
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 using namespace std;
 
@@ -51,6 +55,13 @@ int main()
     vector<Vector3*> contactPoints_r1_p = plane.Intersect(r2);
     cout << "contactPoint_r2_p (" << contactPoints_r4_s.size() << ")\n";
     cout << contactPoints_r1_p[0]->ToString() << "\n";
+
+    Buffer* buffer = new Buffer(200, 100);
+    buffer->FillColor(255, 255, 255);
+
+    int comp = 3;
+    char const* filename = "test01.png";
+    stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
     return 0;
 }

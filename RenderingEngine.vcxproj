@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -155,10 +156,12 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Buffer.hpp" />
     <ClInclude Include="Geometry.hpp" />
     <ClInclude Include="Plane.hpp" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Sphere.hpp" />
+    <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="Vector3.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

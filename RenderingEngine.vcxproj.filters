@@ -19,6 +19,9 @@
     <ClCompile Include="Vector3.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -34,6 +37,12 @@
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="Vector3.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image_write.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

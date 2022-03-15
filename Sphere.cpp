@@ -36,7 +36,7 @@ vector<Vector3*> Sphere::Intersect(Ray& ray)
 	if ( fabs(det) < FLT_EPSILON) // "det == 0" // delta = 0 oznacza 1 przeciecie
 	{
 		float t = (-b) / (2 * a);
-		if (t >= 0) // Czy punkt przeciecia jest pomiendzy poczatkiem a koncem promienia
+		if (t >= 0) // Czy punkt przeciecia jest po wlasciwej stronie polprostej
 			contactPoints.push_back(new Vector3(ray.RayStep(t)));
 	}
 	else if(det > 0) // dodatnia delta oznacza 2 przeciecia
@@ -44,9 +44,9 @@ vector<Vector3*> Sphere::Intersect(Ray& ray)
 		det = sqrtf(det);
 		float t1 = (-b - det) / (2 * a);
 		float t2 = (-b + det) / (2 * a);
-		if (t1 >= 0 && t1 <= 1)// Czy punkt przeciecia jest pomiendzy poczatkiem a koncem promienia
+		if (t1 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
 			contactPoints.push_back(new Vector3(ray.RayStep(t1)));
-		if (t2 >= 0 && t2 <= 1)// Czy punkt przeciecia jest pomiendzy poczatkiem a koncem promienia
+		if (t2 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
 			contactPoints.push_back(new Vector3(ray.RayStep(t2)));
 	}
 

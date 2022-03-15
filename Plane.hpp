@@ -12,6 +12,7 @@ public:
 
 	Plane(Vector3 point, Vector3 normal);
 
-	std::vector<Vector3*> Intersect(Ray& ray) override;
+	std::vector<Vector3*> IntersectPoints(Ray& ray) override;
+	EIntersectType Intersect(Ray& ray) override;
 };
 

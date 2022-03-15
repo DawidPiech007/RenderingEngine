@@ -30,10 +30,10 @@ int main()
     Ray r3(Vector3(0.0f, 10.0f, -20.0f), Vector3(0.0f, 0.0f, 40.0f));
     Ray r4(Vector3(0.0f, 0.0f, 0.0f), Vector3(100.0f, 100.0f, 100.0f));
 
-    vector<Vector3*> contactPoints_r1_s = s.Intersect(r1);
-    vector<Vector3*> contactPoints_r2_s = s.Intersect(r2);
-    vector<Vector3*> contactPoints_r3_s = s.Intersect(r3);
-    vector<Vector3*> contactPoints_r4_s = s.Intersect(r4);
+    vector<Vector3*> contactPoints_r1_s = s.IntersectPoints(r1);
+    vector<Vector3*> contactPoints_r2_s = s.IntersectPoints(r2);
+    vector<Vector3*> contactPoints_r3_s = s.IntersectPoints(r3);
+    vector<Vector3*> contactPoints_r4_s = s.IntersectPoints(r4);
 
     cout << "contactPoints_r1_s (" << contactPoints_r1_s.size() << ")\n";
     cout << contactPoints_r1_s[0]->ToString() << "\n";
@@ -52,7 +52,7 @@ int main()
     Vector3 q2(0.0f, 1.0f, 1.0f);
 
     Plane plane(q1, q2);
-    vector<Vector3*> contactPoints_r1_p = plane.Intersect(r2);
+    vector<Vector3*> contactPoints_r1_p = plane.IntersectPoints(r2);
     cout << "contactPoint_r2_p (" << contactPoints_r4_s.size() << ")\n";
     cout << contactPoints_r1_p[0]->ToString() << "\n";
 

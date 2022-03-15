@@ -14,8 +14,8 @@ public:
 	Sphere(Vector3 c, float r);
 	Sphere();
 
-	std::vector<Vector3*> Intersect(Ray& ray) override;
-
+	std::vector<Vector3*> IntersectPoints(Ray& ray) override;
+	EIntersectType Intersect(Ray& ray) override;
 
 };
 

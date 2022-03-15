@@ -22,6 +22,9 @@
     <ClCompile Include="Buffer.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -43,6 +46,9 @@
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="Buffer.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

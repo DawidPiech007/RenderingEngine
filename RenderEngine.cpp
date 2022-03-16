@@ -7,6 +7,7 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
+#include "LightIntensity.h"
 
 using namespace std;
 
@@ -62,6 +63,15 @@ int main()
     int comp = 3;
     char const* filename = "test01.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
+
+    cout << "LightIntensity test \n";
+
+    LightIntensity li1(0.1f, 0.3f, 0.5f);
+    LightIntensity li2(0.2f, 0.5f, 0.5f);
+    LightIntensity li3 = li1 * 2.f;
+    std::cout << li3.ToString()<<"\n";
+    li3(1, 1, 1);
+    std::cout<<li3.ToString();
 
     return 0;
 }

@@ -25,6 +25,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="LightIntensity.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -49,6 +52,9 @@
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="Camera.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="LightIntensity.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

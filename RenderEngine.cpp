@@ -57,8 +57,9 @@ int main()
     cout << "contactPoint_r2_p (" << contactPoints_r4_s.size() << ")\n";
     cout << contactPoints_r1_p[0]->ToString() << "\n";
 
-    Buffer* buffer = new Buffer(200, 100);
+    Buffer* buffer = new Buffer(600, 600);
     buffer->FillColor(255, 255, 255);
+    buffer->MakeColoredBackGround();
 
     int comp = 3;
     char const* filename = "test01.png";

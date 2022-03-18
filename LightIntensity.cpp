@@ -46,6 +46,14 @@ LightIntensity LightIntensity::operator/(float num)
 	return LightIntensity(this->r / num, this->g / num, this->b / num);
 }
 
+LightIntensity& LightIntensity::operator+=(LightIntensity& light)
+{
+	this->r += light.r;
+	this->g += light.g;
+	this->b += light.b;
+	return *this;
+}
+
 std::string LightIntensity::ToString()
 {
 	std::string text = "  r = " + std::to_string(r) + "\n";

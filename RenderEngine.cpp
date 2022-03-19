@@ -39,6 +39,7 @@ int main()
 
 
     delete camera, buffer, renderer;
+    objects.clear();
 
     return 0;
 }

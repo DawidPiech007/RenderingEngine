@@ -28,6 +28,9 @@
     <ClCompile Include="LightIntensity.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -54,7 +57,10 @@
     <ClInclude Include="Camera.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
-    <ClInclude Include="LightIntensity.h">
+    <ClInclude Include="Renderer.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="LightIntensity.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

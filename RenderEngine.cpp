@@ -7,7 +7,7 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#include "LightIntensity.h"
+#include "LightIntensity.hpp"
 
 using namespace std;
 

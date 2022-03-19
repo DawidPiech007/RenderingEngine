@@ -17,14 +17,14 @@ public:
 
 	void add(float R, float G, float B);
 
-	LightIntensity operator+(LightIntensity& light);
-	LightIntensity operator-(LightIntensity& light);
+	LightIntensity operator+(const LightIntensity& light);
+	LightIntensity operator-(const LightIntensity& light);
 	LightIntensity operator*(float num);
 	LightIntensity operator/(float num);
-	LightIntensity& operator+=(LightIntensity& light);
-	LightIntensity& operator-=(LightIntensity& light);
-	LightIntensity& operator*=(float& num);
-	LightIntensity& operator/=(float& num);
+	LightIntensity& operator+=(const LightIntensity& light);
+	LightIntensity& operator-=(const LightIntensity& light);
+	LightIntensity& operator*=(const float& num);
+	LightIntensity& operator/=(const float& num);
 	std::string ToString();
 
 };

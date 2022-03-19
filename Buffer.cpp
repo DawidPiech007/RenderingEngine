@@ -1,5 +1,5 @@
 #include "Buffer.hpp"
-#include "LightIntensity.h"
+#include "LightIntensity.hpp"
 
 Buffer::Buffer(int width, int height) : width(width), height(height)
 {
@@ -52,8 +52,7 @@ void Buffer::MakeColoredBackGround()
 	{
 		for (float j = 0; j < row; j++)
 		{
-			LightIntensity color =(endColor[i] - startColor[i]) * (j / row);
-			color += startColor[i];
+			LightIntensity color = startColor[i] + (endColor[i] - startColor[i]) * (j / row);
 			
 			int xMin = recSizeX * i;
 			int xMax = xMin + recSizeX;

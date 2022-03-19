@@ -8,35 +8,35 @@ public:
     Vector3();
     Vector3(float x, float y, float z);
 
-    Vector3& operator += (Vector3& b);
-    Vector3& operator -= (Vector3& b);
+    Vector3& operator += (const Vector3& b);
+    Vector3& operator -= (const Vector3& b);
            
     //Vector3& operator += (Vector3 b);
     //Vector3& operator -= (Vector3 b);
     Vector3& operator *= (float k);
     Vector3& operator /= (float k);
 
-    Vector3 operator + (Vector3& b);
-    Vector3 operator - (Vector3& b);
-    Vector3 operator * (float k);
-    Vector3 operator / (float k);
+    Vector3 operator + (const Vector3& b)const;
+    Vector3 operator - (const Vector3& b)const;
+    Vector3 operator * (float k)const;
+    Vector3 operator / (float k)const;
 
     Vector3 operator - ();
     Vector3 operator + ();
 
-    static Vector3 Cross(Vector3& a, Vector3& b);
-    static float Dot(Vector3& a, Vector3& b);
+    static Vector3 Cross(const Vector3& a, const Vector3& b);
+    static float Dot(const Vector3& a, const Vector3& b);
     
-    static float Magnitude(Vector3& a);
-    static float SqrMagnitude(Vector3& a);
+    static float Magnitude(const Vector3& a);
+    static float SqrMagnitude(const Vector3& a);
 
-    float Magnitude();
-    float SqrMagnitude();
+    float Magnitude()const;
+    float SqrMagnitude()const;
 
-    static Vector3 Normalize(Vector3 &a);
+    static Vector3 Normalize(const Vector3 &a);
     Vector3 Normalize();
 
-    std::string ToString();
+    std::string ToString()const;
 
     float x;
     float y;

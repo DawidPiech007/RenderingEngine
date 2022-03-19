@@ -1,4 +1,4 @@
-#include "LightIntensity.h"
+#include "LightIntensity.hpp"
 
 LightIntensity::LightIntensity(float R, float G, float B) : r(R), g(G), b(B) {}
 
@@ -26,12 +26,12 @@ void LightIntensity::operator()(float R)
 	r = R;
 }
 
-LightIntensity LightIntensity::operator+(LightIntensity& light)
+LightIntensity LightIntensity::operator+(const LightIntensity& light)
 {
 	return LightIntensity(this->r + light.r, this->g + light.g, this->b + light.b);
 }
 
-LightIntensity LightIntensity::operator-(LightIntensity& light)
+LightIntensity LightIntensity::operator-(const LightIntensity& light)
 {
 	return LightIntensity(this->r - light.r, this->g - light.g, this->b - light.b);
 }
@@ -46,11 +46,35 @@ LightIntensity LightIntensity::operator/(float num)
 	return LightIntensity(this->r / num, this->g / num, this->b / num);
 }
 
-LightIntensity& LightIntensity::operator+=(LightIntensity& light)
+LightIntensity& LightIntensity::operator+=(const LightIntensity& light)
 {
 	this->r += light.r;
 	this->g += light.g;
 	this->b += light.b;
+	return *this;
+}
+
+LightIntensity& LightIntensity::operator-=(const LightIntensity& light)
+{
+	this->r -= light.r;
+	this->g -= light.g;
+	this->b -= light.b;
+	return *this;
+}
+
+LightIntensity& LightIntensity::operator*=(const float& num)
+{
+	this->r *= num;
+	this->g *= num;
+	this->b *= num;
+	return *this;
+}
+
+LightIntensity& LightIntensity::operator/=(const float& num)
+{
+	this->r *= num;
+	this->g *= num;
+	this->b *= num;
 	return *this;
 }
 

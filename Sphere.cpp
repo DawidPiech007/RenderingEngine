@@ -4,19 +4,19 @@
 
 using namespace std;
 
-Sphere::Sphere(float cx, float cy, float cz, float r)
+Sphere::Sphere(float cx, float cy, float cz, float r, LightIntensity color) : Geometry(color)
 {
 	this->center = Vector3(cx, cy, cz);
 	this->radius = r;
 }
 
-Sphere::Sphere(Vector3 c, float r)
+Sphere::Sphere(Vector3 c, float r, LightIntensity color) : Geometry(color)
 {
 	this->center = c;
 	this->radius = r;
 }
 
-Sphere::Sphere()
+Sphere::Sphere() : Geometry()
 {
 	this->center = Vector3();
 	this->radius = 0;

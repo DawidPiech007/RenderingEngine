@@ -3,7 +3,7 @@
 #include "Vector3.hpp"
 #include <vector>
 
-class Plane: Geometry
+class Plane: public Geometry
 {
 public:
 

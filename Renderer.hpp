@@ -15,5 +15,7 @@ public:
 
 	void BasicRender(std::vector<Geometry*> objects);
 	void BasicRender(Geometry& object);
+	void PerspectiveRender(std::vector<Geometry*> objects);
+	void PerspectiveRender(Geometry& object);
 };
 

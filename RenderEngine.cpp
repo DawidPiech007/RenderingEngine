@@ -27,13 +27,20 @@ int main()
     buffer->MakeColoredBackGround();
 
     vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.5f, LightIntensity(1.0f,0.0f,0.0f)),
-                                new Sphere(0.0f, 0.3f, 2.0f, 0.5f, LightIntensity(1.0f,1.0f,0.0f)), 
+                                new Sphere(-1.0f, 0.3f, 2.0f, 0.5f, LightIntensity(1.0f,1.0f,0.0f)), 
                                 new Sphere(1.0f, 0.0f, 10.0f, 1.5f, LightIntensity(1.0f,0.0f,1.0f)), };
 
     renderer->PerspectiveRender(objects);
 
     int comp = 3;
-    char const* filename = "test01.png";
+    char const* filename = "testPerspective.png";
+    stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
+
+
+    buffer->MakeColoredBackGround();
+    renderer->BasicRender(objects);
+
+    filename = "testOrtographic.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
     delete camera, buffer, renderer;

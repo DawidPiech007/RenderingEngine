@@ -60,9 +60,7 @@ void Renderer::PerspectiveRender(Geometry& object)
             float u = -1.f + (i + 0.5f) * pixelHeight;
             float v = 1.f - (j + 0.5f) * pixelWitdh;
 
-            Vector3 rayDirection = Vector3(u, v, 0) - Vector3(camera->target);
-            rayDirection = rayDirection.Normalize();
-            Ray ray(Vector3(camera->position), rayDirection);
+            Ray ray = camera->GetRay(u, v);
             EIntersectType intersect = object.Intersect(ray);
             if (intersect != EIntersectType::NONE) {
                 buffer->SetColor(i, j, object.baseColor);

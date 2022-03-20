@@ -13,3 +13,10 @@ Camera::Camera(Vector3 position, Vector3 target, Vector3 up)
 	this->target = target;
 	this->up = up;
 }
+
+Ray Camera::GetRay(float u, float v)
+{
+	Vector3 rayDirection = Vector3(u, v, 0) - Vector3(target);
+	rayDirection = rayDirection.Normalize();
+	return  Ray(Vector3(position), rayDirection);
+}

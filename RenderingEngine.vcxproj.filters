@@ -31,6 +31,12 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="ICamera.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraOrthographic.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -61,6 +67,12 @@
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="LightIntensity.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ICamera.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraOrthographic.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

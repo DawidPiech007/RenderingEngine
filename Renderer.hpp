@@ -1,23 +1,22 @@
 #pragma once
 #include <vector>
 
-class Camera;
+class ICamera;
 class Buffer;
 class Geometry;
 
 class Renderer
 {
-public:
-	Camera* camera;
+private:
+	ICamera* camera;
 	Buffer* buffer;
+public:
 
-	Renderer(Buffer& buffer, Camera& camera);
+	Renderer(Buffer& buffer, ICamera& camera);
 
 	void BasicRender(std::vector<Geometry*> objects);
 	void BasicRender(Geometry& object);
-	void PerspectiveRender(std::vector<Geometry*> objects);
-	void PerspectiveRender(Geometry& object);
 	void Render(std::vector<Geometry*> objects, int antyaliasing = 5);
 	void Render(Geometry& object, int antyaliasing = 5);
+	void SetCamera(ICamera& camera);
 };
-

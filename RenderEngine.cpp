@@ -10,6 +10,7 @@
 
 #include "Buffer.hpp"
 #include "Camera.hpp"
+#include "CameraOrthographic.hpp"
 #include "Renderer.hpp"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -21,6 +22,7 @@ int main()
 {
     Buffer* buffer = new Buffer(600, 600);
     Camera* camera = new Camera();
+    CameraOrthographic ortho;
     Renderer* renderer = new Renderer(*buffer, *camera);
 
     //buffer->FillColor(0, 0, 0);
@@ -28,7 +30,7 @@ int main()
 
     vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.5f, LightIntensity(1.0f,0.0f,0.0f)),
                                 new Sphere(-1.0f, 0.3f, 2.0f, 0.5f, LightIntensity(1.0f,1.0f,0.0f)), 
-                                new Sphere(1.0f, 0.0f, 10.0f, 1.5f, LightIntensity(1.0f,0.0f,1.0f)), };
+                                new Sphere(1.0f, 0.0f, 10.0f, 1.0f, LightIntensity(1.0f,0.0f,1.0f)), };
 
     renderer->Render(objects);
 
@@ -38,7 +40,8 @@ int main()
 
 
     buffer->MakeColoredBackGround();
-    renderer->BasicRender(objects);
+    renderer->SetCamera(ortho);
+    renderer->Render(objects);
 
     filename = "testOrtographic.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);

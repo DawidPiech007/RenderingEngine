@@ -17,5 +17,7 @@ public:
 	void BasicRender(Geometry& object);
 	void PerspectiveRender(std::vector<Geometry*> objects);
 	void PerspectiveRender(Geometry& object);
+	void Render(std::vector<Geometry*> objects, int antyaliasing = 5);
+	void Render(Geometry& object, int antyaliasing = 5);
 };
 

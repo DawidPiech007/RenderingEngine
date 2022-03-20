@@ -30,7 +30,7 @@ int main()
                                 new Sphere(-1.0f, 0.3f, 2.0f, 0.5f, LightIntensity(1.0f,1.0f,0.0f)), 
                                 new Sphere(1.0f, 0.0f, 10.0f, 1.5f, LightIntensity(1.0f,0.0f,1.0f)), };
 
-    renderer->PerspectiveRender(objects);
+    renderer->Render(objects);
 
     int comp = 3;
     char const* filename = "testPerspective.png";

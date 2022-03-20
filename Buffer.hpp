@@ -15,6 +15,8 @@ public:
 
 	void MakeColoredBackGround();
 
+	LightIntensity GetColor(int x, int y);
+
 	int width;
 	int height;
 	int lenght;

@@ -92,3 +92,9 @@ void Buffer::MakeColoredBackGround()
 		}
 	}
 }
+
+LightIntensity Buffer::GetColor(int x, int y)
+{
+	int pixel = (y * width + x) * 3;
+	return LightIntensity(data[pixel] * 0.00392f, data[pixel + 1] * 0.00392f, data[pixel + 2] * 0.00392f);
+}

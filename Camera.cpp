@@ -16,6 +16,21 @@ Camera::Camera(Vector3 position, Vector3 target, Vector3 up)
 	fov = 90;
 }
 
+Vector3 Camera::GetPosition()
+{
+	return position;
+}
+
+Vector3 Camera::GetTarget()
+{
+	return target;
+}
+
+Vector3 Camera::GetUp()
+{
+	return up;
+}
+
 Ray Camera::GetRay(float u, float v)
 {
 	Vector3 rayDirection = Vector3(u, v, 0) + Vector3(target);

@@ -32,7 +32,7 @@ int main()
                                 new Sphere(-0.8f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f,1.0f,0.0f)), 
                                 new Sphere(0.99f, 0.0f, 2.0f, 0.3f, LightIntensity(1.0f,0.0f,1.0f)), };
 
-    renderer->Render(objects,2);
+    renderer->Render(objects,3);
 
     int comp = 3;
     char const* filename = "testPerspective.png";
@@ -41,14 +41,14 @@ int main()
 
     buffer->MakeColoredBackGround();
     renderer->SetCamera(*orthographic);
-    renderer->Render(objects,2);
+    renderer->Render(objects,3);
 
     filename = "testOrtographic.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
     cout << "tan: " << tan(45 * 3.14f/ 180.f) << "\n";
 
-    delete camera, buffer, renderer;
+    delete camera, orthographic, buffer, renderer;
     objects.clear();
 
     return 0;

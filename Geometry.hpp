@@ -23,6 +23,7 @@ public:
 	Geometry(LightIntensity baseColor);
 
 	virtual std::vector<Vector3*> IntersectPoints(Ray& ray);
+	virtual Vector3* IntersectPoint(Ray& ray);
 	virtual EIntersectType Intersect(Ray& ray);
 };
 

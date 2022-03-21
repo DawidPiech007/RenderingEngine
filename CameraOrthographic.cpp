@@ -15,6 +15,21 @@ CameraOrthographic::CameraOrthographic(Vector3 position, Vector3 target, Vector3
 	this->up = up;
 }
 
+Vector3 CameraOrthographic::GetPosition()
+{
+	return position;
+}
+
+Vector3 CameraOrthographic::GetTarget()
+{
+	return target;
+}
+
+Vector3 CameraOrthographic::GetUp()
+{
+	return up;
+}
+
 Ray CameraOrthographic::GetRay(float u, float v)
 {
     return Ray(Vector3(u, v, 0), target);

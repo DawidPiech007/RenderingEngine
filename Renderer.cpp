@@ -4,6 +4,7 @@
 #include "Vector3.hpp"
 #include "Ray.hpp"
 #include "Geometry.hpp"
+#include <math.h>
 
 Renderer::Renderer(Buffer& buffer, ICamera& camera)
 {
@@ -28,7 +29,7 @@ void Renderer::BasicRender(Geometry& object)
     {
         for (int j = 0; j < buffer->height; j++)
         {
-            float midX = -1.f + (i + 0.5f) * pixelHeight;
+            float midX = (-1.f + (i + 0.5f) * pixelHeight);
             float midY = 1.f - (j + 0.5f) * pixelWitdh;
 
             Ray ray = camera->GetRay(midX, midY);
@@ -63,8 +64,8 @@ void Renderer::Render(Geometry& object, int antyaliasing)
     {
         for (int j = 0; j < buffer->height; j++)
         {
-            float uMain = -1.f + (i + 0.5f) * pixelHeight;
-            float vMain = 1.f - (j + 0.5f) * pixelWitdh;
+            float uMain = (-1.f + (i + 0.5f) * pixelHeight) * (camera->GetFOV());
+            float vMain = (1.f - (j + 0.5f) * pixelWitdh) * (camera->GetFOV());
 
             LightIntensity color = LightIntensity(0.0f, 0.0f, 0.0f);
 

@@ -22,17 +22,17 @@ int main()
 {
     Buffer* buffer = new Buffer(600, 600);
     Camera* camera = new Camera();
-    CameraOrthographic ortho;
+    camera->SetFOV(60);
+    CameraOrthographic* orthographic = new CameraOrthographic();
     Renderer* renderer = new Renderer(*buffer, *camera);
 
-    //buffer->FillColor(0, 0, 0);
     buffer->MakeColoredBackGround();
 
-    vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.5f, LightIntensity(1.0f,0.0f,0.0f)),
-                                new Sphere(-1.0f, 0.3f, 2.0f, 0.5f, LightIntensity(1.0f,1.0f,0.0f)), 
-                                new Sphere(1.0f, 0.0f, 10.0f, 1.0f, LightIntensity(1.0f,0.0f,1.0f)), };
+    vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f,0.0f,0.0f)),
+                                new Sphere(-0.8f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f,1.0f,0.0f)), 
+                                new Sphere(0.99f, 0.0f, 2.0f, 0.3f, LightIntensity(1.0f,0.0f,1.0f)), };
 
-    renderer->Render(objects);
+    renderer->Render(objects,2);
 
     int comp = 3;
     char const* filename = "testPerspective.png";
@@ -40,11 +40,13 @@ int main()
 
 
     buffer->MakeColoredBackGround();
-    renderer->SetCamera(ortho);
-    renderer->Render(objects);
+    renderer->SetCamera(*orthographic);
+    renderer->Render(objects,2);
 
     filename = "testOrtographic.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
+
+    cout << "tan: " << tan(45 * 3.14f/ 180.f) << "\n";
 
     delete camera, buffer, renderer;
     objects.clear();

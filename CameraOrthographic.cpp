@@ -19,3 +19,11 @@ Ray CameraOrthographic::GetRay(float u, float v)
 {
     return Ray(Vector3(u, v, 0), target);
 }
+
+/*
+For CameraOrthographic always return 1
+*/
+float CameraOrthographic::GetFOV()
+{
+	return 1;
+}

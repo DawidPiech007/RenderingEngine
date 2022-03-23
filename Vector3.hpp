@@ -2,22 +2,40 @@
 
 #include <string>
 
+float epsilon = 0.00001f;
+
 class Vector3
 {
 public:
+    union
+    {
+        struct
+        {
+            float x;
+            float y;
+            float z;
+        };
+        struct
+        {
+            float r;
+            float g;
+            float b;
+        };
+            float p[3];
+    };
+    
+
     Vector3();
     Vector3(float x, float y, float z);
 
     Vector3& operator += (const Vector3& b);
     Vector3& operator -= (const Vector3& b);
-           
-    //Vector3& operator += (Vector3 b);
-    //Vector3& operator -= (Vector3 b);
     Vector3& operator *= (float k);
     Vector3& operator /= (float k);
 
     Vector3 operator + (const Vector3& b)const;
     Vector3 operator - (const Vector3& b)const;
+    Vector3 operator * (const Vector3& b)const;
     Vector3 operator * (float k)const;
     Vector3 operator / (float k)const;
 
@@ -38,8 +56,6 @@ public:
 
     std::string ToString()const;
 
-    float x;
-    float y;
-    float z;
+    
 };
 

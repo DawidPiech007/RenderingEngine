@@ -53,6 +53,11 @@ Vector3 Vector3::operator-(const Vector3& b)const
 	return Vector3(x - b.x, y - b.y, z - b.z);
 }
 
+Vector3 Vector3::operator*(const Vector3& b) const
+{
+	return Vector3(x * b.x, y * b.y, z * b.z);
+}
+
 Vector3 Vector3::operator*(float k)const
 {
 	return Vector3(x * k, y * k, z * k);
@@ -105,12 +110,18 @@ float Vector3::SqrMagnitude()const
 
 Vector3 Vector3::Normalize(const Vector3 &a)
 {
-	return a/a.Magnitude();
+	float magnitude = a.Magnitude();
+	if (magnitude < epsilon)
+		return a / magnitude;
+	return Vector3(0.0f, 0.0f, 0.0f);
 }
 
 Vector3 Vector3::Normalize()
 {
-	return *this/Magnitude();
+	float magnitude = this->Magnitude();
+	if (magnitude < epsilon)
+		return *this / magnitude;
+	return Vector3(0.0f, 0.0f, 0.0f);
 }
 
 

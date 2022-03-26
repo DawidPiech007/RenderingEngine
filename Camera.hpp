@@ -1,6 +1,6 @@
 #pragma once
 #define PI 3.14159265
-#include "Vector3.hpp"
+
 #include "Buffer.hpp"
 #include "Ray.hpp"
 #include "ICamera.hpp"

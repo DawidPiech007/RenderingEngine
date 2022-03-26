@@ -37,6 +37,9 @@
     <ClCompile Include="CameraOrthographic.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="SubPixel.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Geometry.hpp">
@@ -73,6 +76,9 @@
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="CameraOrthographic.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="SubPixel.hpp">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>

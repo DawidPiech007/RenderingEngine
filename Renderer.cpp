@@ -5,13 +5,28 @@
 #include "Ray.hpp"
 #include "Geometry.hpp"
 #include <math.h>
+#include "SubPixel.hpp"
 
 using namespace std;
 
-Renderer::Renderer(Buffer& buffer, ICamera& camera)
+Renderer& Renderer::GetInstance()
 {
-	this->buffer = &buffer;
-	this->camera = &camera;
+    static Renderer* instance = nullptr;
+
+    if (instance == nullptr)
+        instance = new Renderer();
+
+    return *instance;
+}
+
+Renderer::Renderer()
+{
+}
+
+void Renderer::SetUp(Buffer& buffer, ICamera& camera)
+{
+    this->buffer = &buffer;
+    this->camera = &camera;
 }
 
 void Renderer::BasicRender(std::vector<Geometry*> objects)
@@ -43,6 +58,33 @@ void Renderer::BasicRender(Geometry& object)
     }
 }
 
+
+void Renderer::RenderAdaptive(std::vector<Geometry*> objects, int antyaliasing)
+{
+    float pixelWitdh = 2.0f / buffer->width;
+    float pixelHeight = 2.0f / buffer->height;
+
+    float pixelAntyaliasingWitdh = pixelWitdh / antyaliasing;
+    float pixelAntyaliasingHeight = pixelHeight / antyaliasing;
+    float pixelAntyaliasingOffsetX = (antyaliasing - 1) * 0.5f;
+    float pixelAntyaliasingOffsetY = (antyaliasing - 1) * 0.5f;
+
+    for (int i = 0; i < buffer->width; i++)
+    {
+        for (int j = 0; j < buffer->height; j++)
+        {
+            float uMain = (-1.f + (i + 0.5f) * pixelHeight) * (camera->GetFOV());
+            float vMain = (1.f - (j + 0.5f) * pixelWitdh) * (camera->GetFOV());
+
+            LightIntensity color = LightIntensity(0.0f, 0.0f, 0.0f);
+
+            // make sub pixels
+            //SubPixel* subPixel
+            // avrage color off sub pixels
+            buffer->SetColor(i, j, color / (antyaliasing * antyaliasing));
+        }
+    }
+}
 
 void Renderer::Render(std::vector<Geometry*> objects, int antyaliasing)
 {
@@ -159,3 +201,9 @@ void Renderer::SetCamera(ICamera& camera)
 {
     this->camera = &camera;
 }
+
+void GetAntiAlizingColor(float xMin, float xMax, float yMin, float yMax, float w)
+{
+
+}
+

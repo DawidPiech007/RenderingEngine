@@ -27,6 +27,7 @@ public:
 	void SetUp(Buffer& buffer, ICamera& camera, float minWeight);
 
 	void Render(std::vector<Geometry*> objects);
+	void RenderNoAntiAliasing(std::vector<Geometry*> objects);
 
 	void SetCamera(ICamera& camera);
 

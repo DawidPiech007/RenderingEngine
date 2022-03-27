@@ -53,6 +53,26 @@ void Renderer::Render(std::vector<Geometry*> objects)
     }
 }
 
+void Renderer::RenderNoAntiAliasing(std::vector<Geometry*> objects)
+{
+    float pixelWitdh = 2.0f / buffer->width;
+    float pixelHeight = 2.0f / buffer->height;
+
+    for (int i = 0; i < buffer->width; i++)
+    {
+        for (int j = 0; j < buffer->height; j++)
+        {
+            float u = (-1.f + (i + 0.5f) * pixelWitdh) * (camera->GetFOV());
+            float v = (1.f - (j + 0.5f) * pixelHeight) * (camera->GetFOV());
+
+            Ray ray = camera->GetRay(u, v);
+            LightIntensity color = GetColorByRay(objects, ray, i, j);
+
+            buffer->SetColor(i, j, color);
+        }
+    }
+}
+
 void Renderer::SetCamera(ICamera& camera)
 {
     this->camera = &camera;

@@ -20,10 +20,11 @@ private:
 	ICamera* camera;
 	Buffer* buffer;
 	float minWeight;// antialaizing
+	Renderer() {};
 public:
 	static Renderer& GetInstance();
 
-	Renderer();
+	
 	void SetUp(Buffer& buffer, ICamera& camera, float minWeight);
 
 	void Render(std::vector<Geometry*> objects);

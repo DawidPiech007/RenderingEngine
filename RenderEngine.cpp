@@ -28,9 +28,9 @@ int main()
 
     buffer->MakeColoredBackGround();
 
-    vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f,0.0f,0.0f)),
-                                new Sphere(-0.8f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f,1.0f,0.0f)), 
-                                new Sphere(0.99f, 0.0f, 2.0f, 0.3f, LightIntensity(1.0f,0.0f,1.0f)), };
+    vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
+                                new Sphere(-0.8f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)), 
+                                new Sphere(1.4f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)), };
 
     RENDERER.Render(objects);
 

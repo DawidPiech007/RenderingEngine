@@ -19,9 +19,6 @@ Renderer& Renderer::GetInstance()
     return *instance;
 }
 
-Renderer::Renderer()
-{
-}
 
 void Renderer::SetUp(Buffer& buffer, ICamera& camera, float minWeight)
 {
@@ -34,13 +31,14 @@ void Renderer::Render(std::vector<Geometry*> objects)
 {
     float pixelWitdh = 2.0f / buffer->width;
     float pixelHeight = 2.0f / buffer->height;
+    float ratio = buffer->width / (float)buffer->height;
 
     for (int i = 0; i < buffer->width; i++)
     {
         for (int j = 0; j < buffer->height; j++)
         {
-            float uMin = (-1.f + i * pixelWitdh) * (camera->GetFOV());
-            float uMax = (-1.f + (i + 1.0f) * pixelWitdh) * (camera->GetFOV());
+            float uMin = (-1.f + i * pixelWitdh) * (camera->GetFOV() * ratio);
+            float uMax = (-1.f + (i + 1.0f) * pixelWitdh) * (camera->GetFOV() * ratio);
 
             float vMax = (1.f - j * pixelHeight) * (camera->GetFOV());
             float vMin = (1.f - (j + 1.0f) * pixelHeight) * (camera->GetFOV());
@@ -57,12 +55,13 @@ void Renderer::RenderNoAntiAliasing(std::vector<Geometry*> objects)
 {
     float pixelWitdh = 2.0f / buffer->width;
     float pixelHeight = 2.0f / buffer->height;
+    float ratio = buffer->width / (float)buffer->height;
 
     for (int i = 0; i < buffer->width; i++)
     {
         for (int j = 0; j < buffer->height; j++)
         {
-            float u = (-1.f + (i + 0.5f) * pixelWitdh) * (camera->GetFOV());
+            float u = (-1.f + (i + 0.5f) * pixelWitdh) * (camera->GetFOV() * ratio);
             float v = (1.f - (j + 0.5f) * pixelHeight) * (camera->GetFOV());
 
             Ray ray = camera->GetRay(u, v);

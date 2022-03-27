@@ -2,9 +2,6 @@
 
 #include <string>
 
-static float epsilon = 0.00001f;
-
-
 class Vector3
 {
 public:
@@ -25,6 +22,8 @@ public:
             float p[3];
     };
     
+    const static float epsilon;
+
     Vector3();
     Vector3(float x, float y, float z);
 

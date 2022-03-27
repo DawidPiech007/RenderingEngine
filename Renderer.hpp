@@ -26,11 +26,8 @@ public:
 	Renderer();
 	void SetUp(Buffer& buffer, ICamera& camera, float minWeight);
 
-	void BasicRender(std::vector<Geometry*> objects);
-	void BasicRender(Geometry& object);
-	void Render(std::vector<Geometry*> objects, int antyaliasing = 5);
-	void RenderAdaptive(std::vector<Geometry*> objects);
-	void Render(Geometry& object, int antyaliasing = 5);
+	void Render(std::vector<Geometry*> objects);
+
 	void SetCamera(ICamera& camera);
 
 private:

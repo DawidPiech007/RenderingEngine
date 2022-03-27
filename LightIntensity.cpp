@@ -46,6 +46,17 @@ LightIntensity LightIntensity::operator/(float num)
 	return LightIntensity(this->r / num, this->g / num, this->b / num);
 }
 
+bool LightIntensity::operator==(const LightIntensity& light)
+{
+	if (fabs(r - light.r) > sameColor)
+		return false;
+	if (fabs(g - light.g) > sameColor)
+		return false;
+	if (fabs(b - light.b) > sameColor)
+		return false;
+	return true;
+}
+
 LightIntensity& LightIntensity::operator+=(const LightIntensity& light)
 {
 	this->r += light.r;

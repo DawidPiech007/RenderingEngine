@@ -1,5 +1,9 @@
 #pragma once
 #include <string>
+#include <math.h>
+
+static float sameColor = 0.001f;
+
 
 class LightIntensity
 {
@@ -21,6 +25,7 @@ public:
 	LightIntensity operator-(const LightIntensity& light);
 	LightIntensity operator*(float num);
 	LightIntensity operator/(float num);
+	bool operator==(const LightIntensity& light);
 	LightIntensity& operator+=(const LightIntensity& light);
 	LightIntensity& operator-=(const LightIntensity& light);
 	LightIntensity& operator*=(const float& num);

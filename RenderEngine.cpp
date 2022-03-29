@@ -20,7 +20,7 @@ using namespace std;
 
 int main()
 {
-    Buffer* buffer = new Buffer(1920, 1080);
+    Buffer* buffer = new Buffer(1080, 1080);
     Camera* camera = new Camera();
     camera->SetFOV(60);
     CameraOrthographic* orthographic = new CameraOrthographic();
@@ -28,9 +28,10 @@ int main()
 
     buffer->MakeColoredBackGround();
 
-    vector<Geometry*> objects{  new Sphere(0.0f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
-                                new Sphere(-0.8f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)), 
-                                new Sphere(1.4f, 0.4f, 2.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)), };
+    vector<Geometry*> objects{ new Sphere(0.0f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
+                                new Sphere(-0.1f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)),
+                                new Sphere(0.2f, 0.0f, 1.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)),
+                                new Plane(Vector3(0.0f,0.0f,0.8f), Vector3(0.0f,-1.0f,1.0f), LightIntensity(0.6f, 0.6f, 0.6f)) };
 
     RENDERER.Render(objects);
 

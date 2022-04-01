@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#define EPSILON 0.0001f
 
 class Vector3
 {
@@ -22,7 +23,6 @@ public:
             float p[3];
     };
     
-    const static float epsilon;
 
     Vector3();
     Vector3(float x, float y, float z);
@@ -52,6 +52,8 @@ public:
 
     static Vector3 Normalize(const Vector3 &a);
     Vector3 Normalize();
+
+    static Vector3 Zero();
 
     std::string ToString()const;
 

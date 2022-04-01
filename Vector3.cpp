@@ -1,7 +1,6 @@
 #include "Vector3.hpp"
 #include <Math.h>
 
-const float Vector3::epsilon = 0.00001f;
 
 Vector3::Vector3() : x(0), y(0), z(0)
 {
@@ -113,7 +112,7 @@ float Vector3::SqrMagnitude()const
 Vector3 Vector3::Normalize(const Vector3 &a)
 {
 	float magnitude = a.Magnitude();
-	if (magnitude > epsilon)
+	if (magnitude > EPSILON)
 		return a / magnitude;
 	return Vector3(0.0f, 0.0f, 0.0f);
 }
@@ -121,9 +120,14 @@ Vector3 Vector3::Normalize(const Vector3 &a)
 Vector3 Vector3::Normalize()
 {
 	float magnitude = this->Magnitude();
-	if (magnitude > epsilon)
+	if (magnitude > EPSILON)
 		return *this / magnitude;
 	return Vector3(0.0f, 0.0f, 0.0f);
+}
+
+Vector3 Vector3::Zero()
+{
+	return Vector3(0.0f,0.0f,0.0f);
 }
 
 

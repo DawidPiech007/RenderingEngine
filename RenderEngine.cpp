@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿//#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
 
 #include "Vector3.hpp"
 #include "Ray.hpp"
@@ -7,6 +8,8 @@
 #include "Geometry.hpp"
 #include "Plane.hpp"
 #include "Sphere.hpp"
+#include "Triangle.h"
+#include "Mesh.hpp"
 
 #include "Buffer.hpp"
 #include "Camera.hpp"
@@ -15,7 +18,6 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
-#include "Triangle.h"
 
 using namespace std;
 
@@ -40,6 +42,8 @@ int main()
                                 new Sphere(-0.1f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)),
                                 new Sphere(0.2f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)),
                                 &t };
+
+    //Mesh* mesh = new Mesh("object.obj", LightIntensity(1.0f, 0.0f, 0.0f));
 
     RENDERER.Render(objects);
 

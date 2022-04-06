@@ -23,9 +23,10 @@ using namespace std;
 
 int main()
 {
-    Buffer* buffer = new Buffer(1080, 1080);
+    Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     camera->SetFOV(60);
+    camera->position = Vector3(.5f, .5f,  -10.0f);
     CameraOrthographic* orthographic = new CameraOrthographic();
     RENDERER.SetUp(*buffer, *camera, 0.126); // 1/8 + 0.001 czyli rekurencja pójdzie 4 razy w dół
 
@@ -36,7 +37,7 @@ int main()
     Vector3 v3(0, 1, 5);
 
     Triangle t(v1, v2, v3, LightIntensity(0.8f, 0.4f, 0.2f));
-    Mesh mesh("object.obj", LightIntensity(1.0f, 0.0f, 0.0f));
+    Mesh mesh("untitled.obj", LightIntensity(1.0f, 0.0f, 0.0f));
 
 
     //vector<Geometry*> objects{ new Sphere(0.0f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),

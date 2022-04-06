@@ -12,6 +12,8 @@ public:
 	Vector3 target;
 	Vector3 up;
 	float fov; //field of view
+	float nearPlane;
+	float farPlane;
 
 	Camera();
 	Camera(Vector3 position, Vector3 target = Vector3(0.0f, 0.0f, 1.0f), Vector3 up = Vector3(0.0f, 1.0f, 0.0f));

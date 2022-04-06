@@ -1,5 +1,6 @@
 #include "Triangle.h"
 #include "Ray.hpp"
+#include <iostream>
 
 Triangle::Triangle(): v1(Vector3::Zero()), v2(Vector3::Zero()), v3(Vector3::Zero()) {}
 
@@ -16,20 +17,21 @@ Vector3* Triangle::IntersectPoint(Ray& ray)
 	Vector3 v1v3 = v3 - v1;
 
 	Vector3 normal = Vector3::Cross(v1v2, v1v3);
+	normal = normal.Normalize();
 	float dir = Vector3::Dot(normal, ray.direction);
 
-	if (fabs(dir) < EPSILON) //epsilon
-	{
+	if (dir < EPSILON) //backsided
+		return nullptr;
+
+	if (fabs(dir) < EPSILON) 
 		return nullptr; //paralell, no intersection
-	}
 
 	float d = Vector3::Dot(-normal, v1);
 	float t = -(Vector3::Dot(normal, ray.origin) + d) / dir;
 
 	if (t < 0)
-	{
 		return nullptr; // ray behind the triangle
-	}
+
 
 	Vector3 point = ray.RayStep(t);
 

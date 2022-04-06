@@ -5,6 +5,8 @@ Camera::Camera()
 	this->position = Vector3(0.0f, 0.0f, 0.0f);
 	this->target = Vector3(0.0f, 0.0f, 1.0f);
 	this->up = Vector3(0.0f, 1.0f, 0.0f);
+	this->nearPlane = 0;
+	this->farPlane = 100;
 	fov = 90;
 }
 

@@ -1,6 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "Mesh.hpp"
+#include "Renderer.hpp"
+#include "ICamera.hpp"
 #include <fstream>
 #include <iostream>
 #include <filesystem>
@@ -35,7 +37,7 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 
 		if (strcmp(lineHeader, "v") == 0) {
 			Vector3 pos{};
-			fscanf(file, "%f %f %f\n", pos.x, pos.y, pos.z);
+			fscanf(file, "%f %f %f\n", &pos.x, &pos.y, &pos.z);
 			temp_positions.push_back(pos);
 		}
 		//else if (strcmp(lineHeader, "vt") == 0) {
@@ -45,7 +47,7 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 		//}
 		else if (strcmp(lineHeader, "vn") == 0) {
 			Vector3 normal{};
-			fscanf(file, "%f %f %f\n", normal.x, normal.y, normal.z);
+			fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
 			temp_normals.push_back(normal);
 		}
 		else if (strcmp(lineHeader, "f") == 0) {
@@ -89,7 +91,30 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 
 Vector3* Mesh::IntersectPoint(Ray& ray)
 {
-	// TODO IntersectPoint() for all triangles
-	// TODO find closest point to camera
-	return nullptr;
+	Vector3* retVector3 = nullptr;
+	vector<Vector3*> intersectPoints;
+	for (int k = 0; k < triangles.size(); k++)
+	{
+		intersectPoints.push_back(triangles[k].IntersectPoint(ray));
+	}
+
+	// find object clostes to camera
+	float distanceMin = std::numeric_limits<float>::max();
+	for (int k = 0; k < triangles.size(); k++)
+	{
+		if (intersectPoints[k] != nullptr)
+		{
+			float distance = (RENDERER.GetCanera()->GetPosition() - *intersectPoints[k]).SqrMagnitude();
+			if (distance < distanceMin)
+			{
+				distanceMin = distance;
+				delete retVector3;
+				retVector3 = new Vector3(intersectPoints[k]->x, intersectPoints[k]->y, intersectPoints[k]->z);
+			}
+			delete intersectPoints[k]; // delate pointer
+		}
+	}
+	intersectPoints.clear();
+
+	return retVector3;
 }

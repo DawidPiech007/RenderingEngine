@@ -77,6 +77,11 @@ void Renderer::SetCamera(ICamera& camera)
     this->camera = &camera;
 }
 
+ICamera* Renderer::GetCanera()
+{
+    return camera;
+}
+
 LightIntensity Renderer::GetColorByAntyalizing(vector<Geometry*> objects, float xMin, float xMax, float yMin, float yMax, int xPixel, int yPixel, float weight, vector<LightIntensity*> colors)
 {
     LightIntensity outColor(0.0f, 0.0f, 0.0f);

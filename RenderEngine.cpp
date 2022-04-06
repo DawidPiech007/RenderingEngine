@@ -36,14 +36,15 @@ int main()
     Vector3 v3(0, 1, 5);
 
     Triangle t(v1, v2, v3, LightIntensity(0.8f, 0.4f, 0.2f));
+    Mesh mesh("object.obj", LightIntensity(1.0f, 0.0f, 0.0f));
 
 
-    vector<Geometry*> objects{ new Sphere(0.0f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
-                                new Sphere(-0.1f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)),
-                                new Sphere(0.2f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)),
-                                &t };
+    //vector<Geometry*> objects{ new Sphere(0.0f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
+    //                            new Sphere(-0.1f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)),
+    //                            new Sphere(0.2f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)),
+    //                            &t };
 
-    //Mesh* mesh = new Mesh("object.obj", LightIntensity(1.0f, 0.0f, 0.0f));
+    vector<Geometry*> objects{ &mesh };
 
     RENDERER.Render(objects);
 

@@ -32,6 +32,8 @@ public:
 
 	void SetCamera(ICamera& camera);
 
+	ICamera* GetCanera();
+
 private:
 	LightIntensity GetColorByAntyalizing(std::vector<Geometry*> objects, float xMin, float xMax, float yMin, float yMax,
 		int xPixel, int yPixel, float weight, std::vector<LightIntensity*> colors);

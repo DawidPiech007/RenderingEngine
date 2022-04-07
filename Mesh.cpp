@@ -135,6 +135,8 @@ Vector3* Mesh::IntersectPoint(Ray& ray)
 
 LightIntensity Mesh::GetColor()
 {
+	//return baseColor;
+
 	if (tmpLastUsedTriangleIndex == -1)
 	{
 		return LightIntensity();

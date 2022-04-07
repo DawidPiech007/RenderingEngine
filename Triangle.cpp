@@ -20,7 +20,7 @@ Vector3* Triangle::IntersectPoint(Ray& ray)
 	normal = normal.Normalize();
 	float dir = Vector3::Dot(normal, ray.direction);
 
-	if (dir < EPSILON) //backsided
+	if (dir > EPSILON) //backsided
 		return nullptr;
 
 	if (fabs(dir) < EPSILON) 

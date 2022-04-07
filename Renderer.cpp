@@ -184,7 +184,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, Ray& ray,
     // add color
     if (indexMin != -1) {
         //cout << "\nindexMin = " << indexMin;
-        return objects[indexMin]->baseColor;
+        return objects[indexMin]->GetColor();
     }
     else {
         //cout << "\nbuffer->GetColor(xPixel, yPixel) = " << buffer->GetColor(xPixel, yPixel).r;

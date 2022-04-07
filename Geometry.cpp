@@ -24,3 +24,8 @@ EIntersectType Geometry::Intersect(Ray& ray)
 {
 	return NONE;
 }
+
+LightIntensity Geometry::GetColor()
+{
+	return baseColor;
+}

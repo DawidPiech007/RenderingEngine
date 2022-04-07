@@ -26,11 +26,10 @@ int main()
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     camera->SetFOV(60);
-    camera->position = Vector3(.5f, .5f,  -10.0f);
+    camera->position = Vector3(.5f, .5f,  -4.0f);
     CameraOrthographic* orthographic = new CameraOrthographic();
     RENDERER.SetUp(*buffer, *camera, 0.126); // 1/8 + 0.001 czyli rekurencja pójdzie 4 razy w dół
 
-    buffer->MakeColoredBackGround();
 
     Vector3 v1(-1, -1, 5);
     Vector3 v2(1, -1, 5);
@@ -47,6 +46,8 @@ int main()
 
     vector<Geometry*> objects{ &mesh };
 
+    //buffer->MakeColoredBackGround();
+    buffer->FillColor(0.0f, 0.0f, 0.0f);
     RENDERER.Render(objects);
 
     int comp = 3;
@@ -54,7 +55,8 @@ int main()
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
 
-    buffer->MakeColoredBackGround();
+    //buffer->MakeColoredBackGround();
+    buffer->FillColor(0.0f, 0.0f, 0.0f);
     RENDERER.SetCamera(*orthographic);
     RENDERER.Render(objects);
 

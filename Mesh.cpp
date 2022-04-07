@@ -20,7 +20,11 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 		getchar();
 		return;
 	}
-		
+
+	vector<LightIntensity> tmpColors = { {1.f,0.f,0.f }, {0.f,1.f,0.f }, {0.f,0.f,1.f },
+										 {1.f,1.f,0.f }, {0.f,1.f,1.f }, {1.f,0.f,1.f },
+										 {1.f,1.f,1.f }};
+	
 	std::vector< Vector3 > temp_positions{};
 	//std::vector< Vector3 > temp_uvs;
 	std::vector< Vector3 > temp_normals{};
@@ -61,11 +65,15 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 				fclose(file);
 				return;
 			}
+
+			LightIntensity tmpColor = tmpColors[triangles.size() % tmpColors.size()];
+
 			triangles.push_back(Triangle(
 				Vector3(temp_positions[posIndex[0]].x, temp_positions[posIndex[0]].y, temp_positions[posIndex[0]].z),
 				Vector3(temp_positions[posIndex[1]].x, temp_positions[posIndex[1]].y, temp_positions[posIndex[1]].z),
 				Vector3(temp_positions[posIndex[2]].x, temp_positions[posIndex[2]].y, temp_positions[posIndex[2]].z),
-				baseColor));
+				tmpColor));
+
 			//vertexIndices.push_back(vertexIndex[0]);
 			//vertexIndices.push_back(vertexIndex[1]);
 			//vertexIndices.push_back(vertexIndex[2]);
@@ -100,6 +108,7 @@ Vector3* Mesh::IntersectPoint(Ray& ray)
 
 	// find object clostes to camera
 	float distanceMin = std::numeric_limits<float>::max();
+	int indexMin = -1;
 	for (int k = 0; k < triangles.size(); k++)
 	{
 		if (intersectPoints[k] != nullptr)
@@ -108,6 +117,8 @@ Vector3* Mesh::IntersectPoint(Ray& ray)
 			if (distance < distanceMin)
 			{
 				distanceMin = distance;
+				indexMin = k;
+
 				delete retVector3;
 				retVector3 = new Vector3(intersectPoints[k]->x, intersectPoints[k]->y, intersectPoints[k]->z);
 			}
@@ -116,5 +127,17 @@ Vector3* Mesh::IntersectPoint(Ray& ray)
 	}
 	intersectPoints.clear();
 
+	tmpLastUsedTriangleIndex = indexMin;
+
 	return retVector3;
+}
+
+LightIntensity Mesh::GetColor()
+{
+	if (tmpLastUsedTriangleIndex == -1)
+	{
+		return LightIntensity();
+	}
+
+	return triangles[tmpLastUsedTriangleIndex].GetColor();
 }

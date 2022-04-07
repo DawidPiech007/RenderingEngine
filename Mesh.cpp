@@ -13,7 +13,6 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 {
 	this->baseColor = baseColor;
 
-	//TODO load object from obj
 	FILE* file = fopen(path.c_str(), "r");
 	if (file == NULL) {
 		cout<<"Impossible to open the file\n";
@@ -69,20 +68,10 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 			LightIntensity tmpColor = tmpColors[triangles.size() % tmpColors.size()];
 
 			triangles.push_back(Triangle(
-				Vector3(temp_positions[posIndex[0]].x, temp_positions[posIndex[0]].y, temp_positions[posIndex[0]].z),
-				Vector3(temp_positions[posIndex[1]].x, temp_positions[posIndex[1]].y, temp_positions[posIndex[1]].z),
-				Vector3(temp_positions[posIndex[2]].x, temp_positions[posIndex[2]].y, temp_positions[posIndex[2]].z),
+				Vector3(temp_positions[posIndex[0]-1].x, temp_positions[posIndex[0]-1].y, temp_positions[posIndex[0]-1].z),
+				Vector3(temp_positions[posIndex[1]-1].x, temp_positions[posIndex[1]-1].y, temp_positions[posIndex[1]-1].z),
+				Vector3(temp_positions[posIndex[2]-1].x, temp_positions[posIndex[2]-1].y, temp_positions[posIndex[2]-1].z),
 				tmpColor));
-
-			//vertexIndices.push_back(vertexIndex[0]);
-			//vertexIndices.push_back(vertexIndex[1]);
-			//vertexIndices.push_back(vertexIndex[2]);
-			//uvIndices.push_back(uvIndex[0]);
-			//uvIndices.push_back(uvIndex[1]);
-			//uvIndices.push_back(uvIndex[2]);
-			//normalIndices.push_back(normalIndex[0]);
-			//normalIndices.push_back(normalIndex[1]);
-			//normalIndices.push_back(normalIndex[2]);
 		}
 		else {
 			// Probably a comment, eat up the rest of the line
@@ -92,8 +81,20 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 
 	}
 
-	
-
+	//for (int i = 0; i < temp_positions.size(); i++)
+	//{
+	//	cout << "pos[" << i << "].Magnitude() = " << temp_positions[i].Magnitude() << "\n";
+	//	cout << "pos[" << i << "].x = " << temp_positions[i].x << "\n";
+	//	cout << "pos[" << i << "].y = " << temp_positions[i].y << "\n";
+	//	cout << "pos[" << i << "].z = " << temp_positions[i].z << "\n";
+	//}
+	//
+	//for (int i = 0; i < triangles.size(); i++)
+	//{
+	//	cout << "triangles[" << i << "].v1.Magnitude() = " << triangles[i].v1.Magnitude() << "\n";
+	//	cout << "triangles[" << i << "].v2.Magnitude() = " << triangles[i].v2.Magnitude() << "\n";
+	//	cout << "triangles[" << i << "].v3.Magnitude() = " << triangles[i].v3.Magnitude() << "\n";
+	//}
 
 }
 

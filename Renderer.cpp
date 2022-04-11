@@ -137,22 +137,7 @@ LightIntensity Renderer::GetColorByAntyalizing(vector<Geometry*> objects, float 
     }
     colors.clear();
 
-    //if (outColor == LightIntensity())
-    //    ;
-    //else
-    //{
-    //    cout << "\nxMin = " << xMin;
-    //    cout << "\nxMax = " << xMax;
-    //    cout << "\nyMin = " << yMin;
-    //    cout << "\nyMax = " << yMax;
-    //    cout << "\nColors[UP_LEFT]->r    = " << colors[UP_LEFT]->r;
-    //    cout << "\nColors[UP_RIGHT]->r   = " << colors[UP_RIGHT]->r;
-    //    cout << "\nColors[DOWN_RIGHT]->r = " << colors[DOWN_RIGHT]->r;
-    //    cout << "\nColors[DOWN_LEFT]->r  = " << colors[DOWN_LEFT]->r;
-    //    cout << "\nColors[CENTER]->r     = " << colors[CENTER]->r;
-    //}
-
-    return outColor * 0.25f; //  outColor / (4 * weight^2 ) ;
+    return outColor * 0.25f; //  outColor / 4
 }
 
 LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, Ray& ray, int xPixel, int yPixel)

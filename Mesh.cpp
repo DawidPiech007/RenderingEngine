@@ -16,7 +16,6 @@ Mesh::Mesh(string path, LightIntensity baseColor)
 	FILE* file = fopen(path.c_str(), "r");
 	if (file == NULL) {
 		cout<<"Impossible to open the file\n";
-		getchar();
 		return;
 	}
 

@@ -28,7 +28,7 @@ int main()
     camera->SetFOV(60);
     camera->position = Vector3(.5f, .5f,  -15.0f);
     CameraOrthographic* orthographic = new CameraOrthographic();
-    RENDERER.SetUp(*buffer, *camera, 0.126); // 1/8 + 0.001 czyli rekurencja pójdzie 4 razy w dół
+    RENDERER.SetUp(*buffer, *camera, 0.49); // 1/8 + 0.001 czyli rekurencja pójdzie 4 razy w dół
 
 
     Vector3 v1(-1, -1, 5);

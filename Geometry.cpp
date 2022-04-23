@@ -1,5 +1,5 @@
-#include "Geometry.hpp"
-#include "Vector3.hpp"
+#include "Geometry.h"
+#include "Vector3.h"
 
 Geometry::Geometry() : baseColor(1.0f,1.0f,1.0f)
 {

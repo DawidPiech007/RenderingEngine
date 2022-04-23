@@ -1,5 +1,5 @@
 #pragma once
-#include "LightIntensity.hpp"
+#include "LightIntensity.h"
 
 class Buffer
 {

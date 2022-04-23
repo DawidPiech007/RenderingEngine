@@ -1,4 +1,4 @@
-#include "LightIntensity.hpp"
+#include "LightIntensity.h"
 
 LightIntensity::LightIntensity(float R, float G, float B) : r(R), g(G), b(B) {}
 

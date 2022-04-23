@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include"LightIntensity.hpp"
+#include "LightIntensity.h"
 // predekralacje klas 
 class Vector3;
 class Ray;

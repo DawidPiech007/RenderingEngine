@@ -1,5 +1,5 @@
 #include "Triangle.h"
-#include "Ray.hpp"
+#include "Ray.h"
 #include <iostream>
 
 Triangle::Triangle(): v1(Vector3::Zero()), v2(Vector3::Zero()), v3(Vector3::Zero()) {}

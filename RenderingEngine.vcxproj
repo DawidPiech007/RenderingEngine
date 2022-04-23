@@ -163,20 +163,20 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Buffer.hpp" />
-    <ClInclude Include="Camera.hpp" />
-    <ClInclude Include="CameraOrthographic.hpp" />
-    <ClInclude Include="Geometry.hpp" />
-    <ClInclude Include="ICamera.hpp" />
-    <ClInclude Include="LightIntensity.hpp" />
-    <ClInclude Include="Mesh.hpp" />
-    <ClInclude Include="Plane.hpp" />
-    <ClInclude Include="Ray.hpp" />
-    <ClInclude Include="Renderer.hpp" />
-    <ClInclude Include="Sphere.hpp" />
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraOrthographic.h" />
+    <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ICamera.h" />
+    <ClInclude Include="LightIntensity.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Ray.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="stb_image_write.h" />
     <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Vector3.hpp" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

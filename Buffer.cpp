@@ -1,5 +1,5 @@
-#include "Buffer.hpp"
-#include "LightIntensity.hpp"
+#include "Buffer.h"
+#include "LightIntensity.h"
 
 Buffer::Buffer(int width, int height) : width(width), height(height)
 {

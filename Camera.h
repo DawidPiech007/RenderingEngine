@@ -1,9 +1,9 @@
 #pragma once
 #define PI 3.14159265
 
-#include "Buffer.hpp"
-#include "Ray.hpp"
-#include "ICamera.hpp"
+#include "Buffer.h"
+#include "Ray.h"
+#include "ICamera.h"
 
 class Camera: public ICamera
 {

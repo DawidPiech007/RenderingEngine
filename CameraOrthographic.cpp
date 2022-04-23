@@ -1,5 +1,5 @@
-#include "CameraOrthographic.hpp"
-#include "Ray.hpp"
+#include "CameraOrthographic.h"
+#include "Ray.h"
 
 CameraOrthographic::CameraOrthographic()
 {

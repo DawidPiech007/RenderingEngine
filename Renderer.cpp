@@ -1,9 +1,9 @@
-#include "Renderer.hpp"
-#include "Buffer.hpp"
-#include "Camera.hpp"
-#include "Vector3.hpp"
-#include "Ray.hpp"
-#include "Geometry.hpp"
+#include "Renderer.h"
+#include "Buffer.h"
+#include "Camera.h"
+#include "Vector3.h"
+#include "Ray.h"
+#include "Geometry.h"
 #include <math.h>
 #include <iostream>
 

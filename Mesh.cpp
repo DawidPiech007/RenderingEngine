@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "Mesh.hpp"
-#include "Renderer.hpp"
-#include "ICamera.hpp"
+#include "Mesh.h"
+#include "Renderer.h"
+#include "ICamera.h"
 #include <fstream>
 #include <iostream>
 #include <filesystem>

@@ -4,88 +4,88 @@
     <ClCompile Include="RenderEngine.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Plane.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Ray.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="Buffer.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="LightIntensity.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="ICamera.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraOrthographic.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
     <ClCompile Include="Triangle.cpp">
-      <Filter>SourceFiles</Filter>
+      <Filter>SourceFiles\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>SourceFiles\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>SourceFiles\Geometry</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>SourceFiles</Filter>
+      <Filter>SourceFiles\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cpp">
+      <Filter>SourceFiles\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>SourceFiles\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraOrthographic.cpp">
+      <Filter>SourceFiles\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ICamera.cpp">
+      <Filter>SourceFiles\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>SourceFiles\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="LightIntensity.cpp">
+      <Filter>SourceFiles\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>SourceFiles\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Ray.cpp">
+      <Filter>SourceFiles\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Geometry.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3.hpp">
+    <ClInclude Include="Vector3.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
     <ClInclude Include="stb_image_write.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
-    <ClInclude Include="Buffer.hpp">
-      <Filter>HeaderFiles</Filter>
+    <ClInclude Include="Sphere.h">
+      <Filter>HeaderFiles\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="LightIntensity.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="ICamera.hpp">
-      <Filter>HeaderFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraOrthographic.hpp">
-      <Filter>HeaderFiles</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>HeaderFiles\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Triangle.h">
-      <Filter>HeaderFiles</Filter>
+      <Filter>HeaderFiles\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.hpp">
-      <Filter>HeaderFiles</Filter>
+    <ClInclude Include="Geometry.h">
+      <Filter>HeaderFiles\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>HeaderFiles\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraOrthographic.h">
+      <Filter>HeaderFiles\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>HeaderFiles\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ICamera.h">
+      <Filter>HeaderFiles\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>HeaderFiles\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="LightIntensity.h">
+      <Filter>HeaderFiles\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>HeaderFiles\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>HeaderFiles\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +96,24 @@
     <Filter Include="HeaderFiles">
       <UniqueIdentifier>{6311da5c-5c61-4aad-ba85-d1249d2bd1fb}</UniqueIdentifier>
       <Extensions>h;hpp</Extensions>
+    </Filter>
+    <Filter Include="HeaderFiles\Geometry">
+      <UniqueIdentifier>{b904fa63-45f5-4b3e-b5e6-c8d46756c923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Camera">
+      <UniqueIdentifier>{bdc57f35-4d2c-43f0-bf57-aea5dade730a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Rendering">
+      <UniqueIdentifier>{541ef09d-70d4-4606-af28-3190b13e6aca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Geometry">
+      <UniqueIdentifier>{21ddcde0-14df-48d0-8d26-b75ec7a3a10b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Camera">
+      <UniqueIdentifier>{ced2576d-783b-46d9-b573-0fb6d36ab800}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Rendering">
+      <UniqueIdentifier>{baf168c1-1e8e-4a58-9681-c172f1e507c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

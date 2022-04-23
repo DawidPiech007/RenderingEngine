@@ -1,20 +1,20 @@
 ﻿//#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 
-#include "Vector3.hpp"
-#include "Ray.hpp"
-#include "LightIntensity.hpp"
+#include "Vector3.h"
+#include "Ray.h"
+#include "LightIntensity.h"
 
-#include "Geometry.hpp"
-#include "Plane.hpp"
-#include "Sphere.hpp"
+#include "Geometry.h"
+#include "Plane.h"
+#include "Sphere.h"
 #include "Triangle.h"
-#include "Mesh.hpp"
+#include "Mesh.h"
 
-#include "Buffer.hpp"
-#include "Camera.hpp"
-#include "CameraOrthographic.hpp"
-#include "Renderer.hpp"
+#include "Buffer.h"
+#include "Camera.h"
+#include "CameraOrthographic.h"
+#include "Renderer.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"

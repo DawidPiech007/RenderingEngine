@@ -1,6 +1,6 @@
-#include "Plane.hpp"
-#include "Vector3.hpp"
-#include "Ray.hpp"
+#include "Plane.h"
+#include "Vector3.h"
+#include "Ray.h"
 #include <iostream>
 
 Plane::Plane(Vector3 point, Vector3 normal) : point(point), normal(normal) {}

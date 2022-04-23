@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "LightIntensity.hpp"
+#include "LightIntensity.h"
 #define RENDERER Renderer::GetInstance()
 
 #define UP_LEFT 0

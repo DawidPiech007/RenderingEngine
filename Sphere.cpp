@@ -1,6 +1,6 @@
-#include "Sphere.hpp"
-#include "Vector3.hpp"
-#include "Ray.hpp"
+#include "Sphere.h"
+#include "Vector3.h"
+#include "Ray.h"
 
 using namespace std;
 

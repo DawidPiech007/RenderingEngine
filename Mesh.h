@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "Geometry.hpp"
+#include "Geometry.h"
 #include "Triangle.h"
 
 class Mesh : public Geometry

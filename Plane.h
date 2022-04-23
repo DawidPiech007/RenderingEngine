@@ -1,6 +1,6 @@
 #pragma once
-#include "Geometry.hpp"
-#include "Vector3.hpp"
+#include "Geometry.h"
+#include "Vector3.h"
 #include <vector>
 
 class Plane: public Geometry

@@ -26,28 +26,13 @@ int main()
 {
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
-    camera->SetFOV(60);
-    camera->position = Vector3(.5f, .5f,  -25.0f);
+    camera->SetFOV(80);
+    camera->position = Vector3(.0f, .0f,  -13.0f);
     CameraOrthographic* orthographic = new CameraOrthographic();
     RENDERER.SetUp(*buffer, *camera, 0.49); // 1/2 - 0.001 czyli rekurencja pójdzie 3 razy w dół
 
-
-    Vector3 v1(-1, -1, 5);
-    Vector3 v2(1, -1, 5);
-    Vector3 v3(0, 1, 5);
-
-    Triangle t(v1, v2, v3, LightIntensity(0.8f, 0.4f, 0.2f));
-    Mesh mesh("monkey_in_box_simple.obj", LightIntensity(1.0f, 0.0f, 0.0f));
-
-
-    //vector<Geometry*> objects{ new Sphere(0.0f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 0.0f)),
-    //                            new Sphere(-0.1f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 1.0f, 0.0f)),
-    //                            new Sphere(0.2f, 0.0f, 9.0f, 0.3f, LightIntensity(1.0f, 0.0f, 1.0f)),
-    //                            &t };
-
-    vector<Geometry*> objects{ &mesh };
-
-    //ParserOBJ::AddNewObjectsToVector("testObjct2.obj", objects);
+    vector<Geometry*> objects{};
+    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey_in_box.obj", objects);
 
     //buffer->MakeColoredBackGround();
     buffer->FillColor(0.0f, 0.0f, 0.0f);
@@ -56,17 +41,6 @@ int main()
     int comp = 3;
     char const* filename = "testPerspective.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
-
-
-    //buffer->MakeColoredBackGround();
-    //buffer->FillColor(0.0f, 0.0f, 0.0f);
-    //RENDERER.SetCamera(*orthographic);
-    //RENDERER.Render(objects);
-    //
-    //filename = "testOrtographic.png";
-    //stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
-
-
 
     delete camera, orthographic, buffer, RENDERER;
     objects.clear();

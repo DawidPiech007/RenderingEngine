@@ -38,11 +38,12 @@ std::vector<Vector3*> Triangle::IntersectPoints(Ray& ray)
 
 Vector3* Triangle::IntersectPoint(Ray& ray)
 {
-	Vector3 v1v2 = v2 - v1;
-	Vector3 v1v3 = v3 - v1;
-
-	Vector3 normal = Vector3::Cross(v1v2, v1v3);
-	normal = normal.Normalize();
+	//Vector3 v1v2 = v2 - v1;
+	//Vector3 v1v3 = v3 - v1;
+	//
+	//Vector3 normal = Vector3::Cross(v1v2, v1v3);
+	//normal = normal.Normalize();
+	Vector3 normal = n1;
 	float dir = Vector3::Dot(normal, ray.direction);
 
 	if (dir > EPSILON) //backsided

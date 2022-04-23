@@ -10,7 +10,7 @@
 
 using namespace std;
 
-void ParserOBJ::AddNewObjectsToVector(std::string path, std::vector<Geometry*> objects)
+void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geometry*> &objects)
 {
 	vector<Material*> materials{};
 	vector<Mesh*> meshs{};
@@ -18,7 +18,7 @@ void ParserOBJ::AddNewObjectsToVector(std::string path, std::vector<Geometry*> o
 	
 	FILE* file = fopen(path.c_str(), "r");
 	if (file == NULL) {
-		cout << "Impossible to open the file\n";
+		cout << "Impossible to open the file (.obj)\n";
 		return;
 	}
 	
@@ -45,10 +45,29 @@ void ParserOBJ::AddNewObjectsToVector(std::string path, std::vector<Geometry*> o
 			meshs.push_back(new Mesh());
 		}
 		else if (strcmp(lineHeader, "usemtl") == 0) {
-			
+			char materialName[128];
+			fscanf(file, "%s", materialName);
+			bool find = false;
+			for (int i = 0; i < materials.size(); i++)
+			{
+				if (materialName == materials[i]->name)
+				{
+					find = true;
+					meshs[meshID]->material = materials[i];
+					break;
+				}
+			}
+			if (find == false)
+			{
+				printf("File can't be read (wrong material name)\n");
+				fclose(file);
+				return;
+			}
 		}
 		else if (strcmp(lineHeader, "mtllib") == 0) {
-
+			char mtlFile[128];
+			fscanf(file, "%s", mtlFile);
+			AddNewMaterialToVectorFromMTL(mtlFile, materials);
 		}
 		else if (strcmp(lineHeader, "v") == 0) {
 			Vector3 pos{};
@@ -137,13 +156,13 @@ void ParserOBJ::AddNewObjectsToVector(std::string path, std::vector<Geometry*> o
 				}
 			}
 
-			cout << "\nmatches = " << matches << endl;
-			for (int i = 0; i < 4; i++)
-				cout << "posIndex[" << i << "] = " << posIndex[i] << endl;
-			for (int i = 0; i < 4; i++)
-				cout << "uvIndex[" << i << "] = " << uvIndex[i] << endl;
-			for (int i = 0; i < 4; i++)
-				cout << "normalIndex[" << i << "] = " << normalIndex[i] << endl;
+			//cout << "\nmatches = " << matches << endl;
+			//for (int i = 0; i < 4; i++)
+			//	cout << "posIndex[" << i << "] = " << posIndex[i] << endl;
+			//for (int i = 0; i < 4; i++)
+			//	cout << "uvIndex[" << i << "] = " << uvIndex[i] << endl;
+			//for (int i = 0; i < 4; i++)
+			//	cout << "normalIndex[" << i << "] = " << normalIndex[i] << endl;
 			
 		}
 		else {
@@ -152,5 +171,65 @@ void ParserOBJ::AddNewObjectsToVector(std::string path, std::vector<Geometry*> o
 			fgets(stupidBuffer, 1000, file);
 		}
 	
+	}
+	
+
+	for (int i = 0; i < meshs.size(); i++)
+	{
+		objects.push_back(meshs[i]);
+	}
+}
+
+void ParserOBJ::AddNewMaterialToVectorFromMTL(std::string path, std::vector<Material*> &materials)
+{
+	FILE* file = fopen(path.c_str(), "r");
+	if (file == NULL) {
+		cout << "Impossible to open the file (.mlt)\n";
+		return;
+	}
+
+	int materialID = materials.size() - 1;
+
+	while (1) {
+
+		char lineHeader[128];
+		// read the first word of the line
+		int res = fscanf(file, "%s", lineHeader);
+		if (res == EOF)
+			break; // EOF = End Of File. Quit the loop.
+
+		// else : parse lineHeader
+
+		if (strcmp(lineHeader, "newmtl") == 0) { // New Material
+			char materialName[128];
+			fscanf(file, "%s", materialName);
+			materialID++;
+			materials.push_back(new Material(materialName));
+		}
+		else if (strcmp(lineHeader, "Ns") == 0) {
+			float shinines;
+			fscanf(file, "%f\n", &shinines);
+			materials[materialID]->SetValue(shinines, "Ns");
+		}
+		else if (strcmp(lineHeader, "Ka") == 0) {
+			LightIntensity ambient{};
+			fscanf(file, "%f %f %f\n", &ambient.r, &ambient.g, &ambient.b);
+			materials[materialID]->SetValue(ambient, "Ka");
+		}
+		else if (strcmp(lineHeader, "Kd") == 0) {
+			LightIntensity diffuse{};
+			fscanf(file, "%f %f %f\n", &diffuse.r, &diffuse.g, &diffuse.b);
+			materials[materialID]->SetValue(diffuse, "Kd");
+		}
+		else if (strcmp(lineHeader, "Ks") == 0) {
+			LightIntensity specular{};
+			fscanf(file, "%f %f %f\n", &specular.r, &specular.g, &specular.b);
+			materials[materialID]->SetValue(specular, "Ks");
+		}
+		else if (strcmp(lineHeader, "d") == 0) {
+			float transparency;
+			fscanf(file, "%f\n", &transparency);
+			materials[materialID]->SetValue(transparency, "d");
+		}
 	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#define EPSILON 0.00001f
+#define EPSILON 0.0000001f
 
 class Vector3
 {

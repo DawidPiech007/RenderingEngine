@@ -43,6 +43,15 @@
     <ClCompile Include="Ray.cpp">
       <Filter>SourceFiles\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="ParserOBJ.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -86,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>HeaderFiles\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ParserOBJ.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

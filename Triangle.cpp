@@ -6,6 +6,31 @@ Triangle::Triangle(): v1(Vector3::Zero()), v2(Vector3::Zero()), v3(Vector3::Zero
 
 Triangle::Triangle(Vector3 v1, Vector3 v2, Vector3 v3, LightIntensity baseColor): v1(v1), v2(v2), v3(v3), Geometry(baseColor) {}
 
+Triangle::Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3, LightIntensity baseColor)
+{
+	this->v1 = v1;
+	this->v2 = v2;
+	this->v3 = v3;
+	this->n1 = n1;
+	this->n2 = n2;
+	this->n3 = n3;
+	this->baseColor = baseColor;
+}
+
+Triangle::Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3, Vector2 uv1, Vector2 uv2, Vector2 uv3, LightIntensity baseColor)
+{
+	this->v1 = v1;
+	this->v2 = v2;
+	this->v3 = v3;
+	this->n1 = n1;
+	this->n2 = n2;
+	this->n3 = n3;
+	this->uv1 = uv1;
+	this->uv2 = uv2;
+	this->uv3 = uv3;
+	this->baseColor = baseColor;
+}
+
 std::vector<Vector3*> Triangle::IntersectPoints(Ray& ray)
 {
 	return std::vector<Vector3*>();

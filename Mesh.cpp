@@ -9,6 +9,11 @@
 
 using namespace std;
 
+Mesh::Mesh()
+{
+	triangles = vector<Triangle>();
+}
+
 Mesh::Mesh(string path, LightIntensity baseColor)
 {
 	this->baseColor = baseColor;

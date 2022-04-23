@@ -11,9 +11,9 @@ Triangle::Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, V
 	this->v1 = v1;
 	this->v2 = v2;
 	this->v3 = v3;
-	this->n1 = n1;
-	this->n2 = n2;
-	this->n3 = n3;
+	this->n1 = n1.Normalize();
+	this->n2 = n2.Normalize();
+	this->n3 = n3.Normalize();
 	this->baseColor = baseColor;
 }
 
@@ -22,9 +22,9 @@ Triangle::Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, V
 	this->v1 = v1;
 	this->v2 = v2;
 	this->v3 = v3;
-	this->n1 = n1;
-	this->n2 = n2;
-	this->n3 = n3;
+	this->n1 = n1.Normalize();
+	this->n2 = n2.Normalize();
+	this->n3 = n3.Normalize();
 	this->uv1 = uv1;
 	this->uv2 = uv2;
 	this->uv3 = uv3;

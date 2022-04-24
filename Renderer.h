@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "LightIntensity.h"
+
 #define RENDERER Renderer::GetInstance()
 
 #define UP_LEFT 0
@@ -13,6 +14,7 @@ class ICamera;
 class Buffer;
 class Geometry;
 class Ray;
+class Light;
 
 class Renderer
 {
@@ -27,17 +29,17 @@ public:
 	
 	void SetUp(Buffer& buffer, ICamera& camera, float minWeight);
 
-	void Render(std::vector<Geometry*> objects);
-	void RenderNoAntiAliasing(std::vector<Geometry*> objects);
+	void Render(std::vector<Geometry*> objects, std::vector<Light*> lights);
+	void RenderNoAntiAliasing(std::vector<Geometry*> objects, std::vector<Light*> lights);
 
 	void SetCamera(ICamera& camera);
 
 	ICamera* GetCanera();
 
 private:
-	LightIntensity GetColorByAntyalizing(std::vector<Geometry*> objects, float xMin, float xMax, float yMin, float yMax,
+	LightIntensity GetColorByAntyalizing(std::vector<Geometry*> objects, std::vector<Light*> lights, float xMin, float xMax, float yMin, float yMax,
 		int xPixel, int yPixel, float weight, std::vector<LightIntensity*> colors);
 
-	LightIntensity GetColorByRay(std::vector<Geometry*> objects, Ray& ray, int xPixel, int yPixel);
+	LightIntensity GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel);
 
 };

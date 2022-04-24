@@ -17,6 +17,8 @@
 #include "Renderer.h"
 #include "ParserOBJ.h"
 
+#include "PointLight.h"
+
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
@@ -32,11 +34,14 @@ int main()
     RENDERER.SetUp(*buffer, *camera, 0.49); // 1/2 - 0.001 czyli rekurencja pójdzie 3 razy w dół
 
     vector<Geometry*> objects{};
-    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey_in_box.obj", objects);
+    //ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey_in_box.obj", objects);
+    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey.obj", objects);
+
+    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-8.0f, 8.0f, -4.0f), 1.0f, 1.0f, 1.0f) };
 
     //buffer->MakeColoredBackGround();
     buffer->FillColor(0.0f, 0.0f, 0.0f);
-    RENDERER.Render(objects);
+    RENDERER.Render(objects, lights);
 
     int comp = 3;
     char const* filename = "testPerspective.png";

@@ -52,6 +52,12 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>SourceFiles\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>SourceFiles\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -105,6 +111,12 @@
     <ClInclude Include="Vector2.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>HeaderFiles\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLight.h">
+      <Filter>HeaderFiles\Light</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="SourceFiles">
@@ -132,6 +144,12 @@
     </Filter>
     <Filter Include="SourceFiles\Rendering">
       <UniqueIdentifier>{baf168c1-1e8e-4a58-9681-c172f1e507c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\Light">
+      <UniqueIdentifier>{09dab3a4-be5d-4f39-b37c-613f28261a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Light">
+      <UniqueIdentifier>{1914a4b1-a59e-421d-9ecd-e813a4d7c5bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

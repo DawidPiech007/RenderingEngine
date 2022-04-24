@@ -23,6 +23,7 @@ public:
 
 	LightIntensity operator+(const LightIntensity& light);
 	LightIntensity operator-(const LightIntensity& light);
+	LightIntensity operator*(const LightIntensity& light);
 	LightIntensity operator*(float num);
 	LightIntensity operator/(float num);
 	bool operator==(const LightIntensity& light);

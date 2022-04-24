@@ -151,10 +151,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraOrthographic.cpp" />
     <ClCompile Include="ICamera.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightIntensity.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ParserOBJ.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="RenderEngine.cpp" />
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -171,10 +173,12 @@
     <ClInclude Include="CameraOrthographic.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="ICamera.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="LightIntensity.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ParserOBJ.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Renderer.h" />

@@ -46,8 +46,8 @@ Vector3* Triangle::IntersectPoint(Ray& ray)
 	Vector3 normal = n1;
 	float dir = Vector3::Dot(normal, ray.direction);
 
-	if (dir > EPSILON) //backsided
-		return nullptr;
+	//if (dir > EPSILON) //backsided
+	//	return nullptr;
 
 	if (fabs(dir) < EPSILON) 
 		return nullptr; //paralell, no intersection

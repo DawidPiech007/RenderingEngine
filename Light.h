@@ -4,7 +4,7 @@
 #include "LightIntensity.h"
 #include "Vector3.h"
 
-#define MIN_DISTANCE 0.001f
+#define MIN_DISTANCE 0.000001f
 
 class Material;
 class ICamera;

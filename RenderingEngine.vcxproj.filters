@@ -58,6 +58,9 @@
     <ClCompile Include="PointLight.cpp">
       <Filter>SourceFiles\Light</Filter>
     </ClCompile>
+    <ClCompile Include="AmbientLight.cpp">
+      <Filter>SourceFiles\Light</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -115,6 +118,9 @@
       <Filter>HeaderFiles\Light</Filter>
     </ClInclude>
     <ClInclude Include="PointLight.h">
+      <Filter>HeaderFiles\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="AmbientLight.h">
       <Filter>HeaderFiles\Light</Filter>
     </ClInclude>
   </ItemGroup>

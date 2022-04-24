@@ -1,9 +1,10 @@
 #include "PointLight.h"
 #include "Material.h"
-#include <vector>
 #include "Geometry.h"
 #include "Ray.h"
 #include "Camera.h"
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -32,6 +33,7 @@ LightIntensity PointLight::CaculateColor(Material* material, Vector3 position, V
 
 bool PointLight::IsInShadow(Vector3 position, ICamera* camera, std::vector<Geometry*> objects)
 {
+    //Ray ray = Ray(position, position- lightPos);
     Ray ray = Ray(position, lightPos - position);
 
     vector<Vector3*> intersectPoints;
@@ -42,13 +44,14 @@ bool PointLight::IsInShadow(Vector3 position, ICamera* camera, std::vector<Geome
 
     // find object clostes to camera
     int indexMin = -1;
-    float distanceMin = (lightPos - position).SqrMagnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
+    float distanceMin = (lightPos - position).Magnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
+
     for (int k = 0; k < objects.size(); k++)
     {
         if (intersectPoints[k] != nullptr)
         {
-            float distance = (camera->GetPosition() - *intersectPoints[k]).SqrMagnitude();
-            if (distance < distanceMin && distance> MIN_DISTANCE)
+            float distance = (camera->GetPosition() - *intersectPoints[k]).Magnitude();
+            if (distance < distanceMin/* && distance> MIN_DISTANCE*/)
             {
                 distanceMin = distance;
                 indexMin = k;
@@ -57,8 +60,9 @@ bool PointLight::IsInShadow(Vector3 position, ICamera* camera, std::vector<Geome
         }
     }
     intersectPoints.clear();
-    
-    if(indexMin == -1)
+
+    if (indexMin == -1)
 	    return false;
+
     return true;
 }

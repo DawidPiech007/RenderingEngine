@@ -171,6 +171,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
     // add color
     if (indexMin != -1) {
         //return objects[indexMin]->GetColor();
+        //return objects[indexMin]->material->diffuse;;
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         for (int i = 0; i < lights.size(); i++)
         {

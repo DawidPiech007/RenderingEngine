@@ -18,6 +18,7 @@
 #include "ParserOBJ.h"
 
 #include "PointLight.h"
+#include "AmbientLight.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
@@ -29,19 +30,33 @@ int main()
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     camera->SetFOV(80);
-    camera->position = Vector3(.0f, .0f,  -13.0f);
+    camera->position = Vector3(.0f, .0f,  -9.5f);
     CameraOrthographic* orthographic = new CameraOrthographic();
     RENDERER.SetUp(*buffer, *camera, 0.49); // 1/2 - 0.001 czyli rekurencja pójdzie 3 razy w dół
 
     vector<Geometry*> objects{};
     //ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey_in_box.obj", objects);
-    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey.obj", objects);
+    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey_in_box.obj", objects);
 
-    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-8.0f, 8.0f, -4.0f), 1.0f, 1.0f, 1.0f) };
+    objects.push_back(new Sphere(Vector3(-2.0f, 2.0f, -4.0f), 0.3f));
+    Material* material = new Material("name");
+    material->SetValue(LightIntensity(1.0f, 0.0f, 0.0f), "Kd");
+    material->SetValue(LightIntensity(1.0f, 0.0f, 0.0f), "Ka");
+    objects[objects.size() - 1]->material = material;
+
+    // Bez lub z małpą
+    //objects[0] = objects[3];
+    //objects.pop_back();
+
+    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-2.0f, 2.0f, -4.0f), 1.0f, 1.0f, 1.0f),
+                           new AmbientLight(LightIntensity(0.05f, 0.05f, 0.1f))};
+
+    //vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 0.0f, 0.0f), 1.0f, 1.0f, 1.0f),
+    //                       new AmbientLight(LightIntensity(0.05f, 0.05f, 0.1f)) };
 
     //buffer->MakeColoredBackGround();
     buffer->FillColor(0.0f, 0.0f, 0.0f);
-    RENDERER.Render(objects, lights);
+    RENDERER.RenderNoAntiAliasing(objects, lights);
 
     int comp = 3;
     char const* filename = "testPerspective.png";

@@ -144,6 +144,7 @@ LightIntensity Renderer::GetColorByAntyalizing(vector<Geometry*> objects, std::v
 
 LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel)
 {
+    Vector3* intersectPoint = new Vector3();
     vector<Vector3*> intersectPoints;
     for (int k = 0; k < objects.size(); k++)
     {
@@ -162,6 +163,8 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             {
                 distanceMin = distance;
                 indexMin = k;
+                delete intersectPoint;
+                intersectPoint = new Vector3(intersectPoints[k]->x, intersectPoints[k]->y, intersectPoints[k]->z);
             }
             delete intersectPoints[k]; // delate pointer
         }
@@ -175,16 +178,18 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         for (int i = 0; i < lights.size(); i++)
         {
-            if (lights[i]->IsInShadow(*intersectPoints[indexMin], camera, objects) == false)
+            if (lights[i]->IsInShadow(*intersectPoint, camera, objects) == false)
             {                                                                       //  ===========================================  //
                 outColor += lights[i]->CaculateColor(objects[indexMin]->material,   //                                               //
-                    *intersectPoints[indexMin], Vector3(1.0f, 0.0f, 0.0f), camera); //      NIE PRZEKAZUJE WEKTORA NORMALNEGO        //
+                    *intersectPoint, Vector3(1.0f, 0.0f, 0.0f), camera);             //      NIE PRZEKAZUJE WEKTORA NORMALNEGO        //
             }                                                                       //                                               //
         }                                                                           //  ===========================================  //
 
         if (outColor.r > 1.0f)    outColor.r = 1.0f;
         if (outColor.g > 1.0f)    outColor.g = 1.0f;
         if (outColor.b > 1.0f)    outColor.b = 1.0f;
+
+        delete intersectPoint;
 
         return outColor;
     }

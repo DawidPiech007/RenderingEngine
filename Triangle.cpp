@@ -38,12 +38,15 @@ std::vector<Vector3*> Triangle::IntersectPoints(Ray& ray)
 
 Vector3* Triangle::IntersectPoint(Ray& ray)
 {
-	//Vector3 v1v2 = v2 - v1;
-	//Vector3 v1v3 = v3 - v1;
-	//
-	//Vector3 normal = Vector3::Cross(v1v2, v1v3);
-	//normal = normal.Normalize();
+
 	Vector3 normal = n1;
+	if (&normal == NULL) {
+		Vector3 v1v2 = v2 - v1;
+		Vector3 v1v3 = v3 - v1;
+		
+		Vector3 normal = Vector3::Cross(v1v2, v1v3);
+		normal = normal.Normalize();
+	}
 	float dir = Vector3::Dot(normal, ray.direction);
 
 	if (dir > EPSILON) //backsided
@@ -84,7 +87,22 @@ Vector3* Triangle::IntersectPoint(Ray& ray)
 	if (Vector3::Dot(normal, c3) < EPSILON)
 		return nullptr;
 
-	return new Vector3(ray.RayStep(t)); // TODO why &point doesnt work
+	Vector3 ev0 = v1 - v3;
+	Vector3 ev1 = v1 - v2;
+
+	Vector3 temp = Vector3::Cross(ev1, ev0);
+	float field = Vector3::Dot(temp, normal);
+
+	float fieldv1 = Vector3::Dot(c1, normal);
+	float fieldv2 = Vector3::Dot(c2, normal);
+	float fieldv3 = Vector3::Dot(c3, normal);
+
+	float alpha = fieldv1 / field;
+	float beta = fieldv2 / field;
+	float theta = fieldv3 / field;
+	//std::cout << theta << "\n";
+
+	return new Vector3(ray.RayStep(t));
 }
 
 EIntersectType Triangle::Intersect(Ray& ray)

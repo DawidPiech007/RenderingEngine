@@ -12,12 +12,10 @@ public:
 	Vector2 uv1, uv2, uv3;
 
 	Triangle();
-	Triangle(Vector3 v1, Vector3 v2, Vector3 v3, LightIntensity baseColor = LightIntensity());
-	Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3, LightIntensity baseColor = LightIntensity());
-	Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3, Vector2 uv1, Vector2 uv2, Vector2 uv3, LightIntensity baseColor = LightIntensity());
+	Triangle(Vector3 v1, Vector3 v2, Vector3 v3);
+	Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3);
+	Triangle(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 n1, Vector3 n2, Vector3 n3, Vector2 uv1, Vector2 uv2, Vector2 uv3);
 
-	std::vector<Vector3*> IntersectPoints(Ray& ray);
-	Vector3* IntersectPoint(Ray& ray);
-	EIntersectType Intersect(Ray& ray);
+	Intersection* GetIntersection(Ray& ray, bool backsidedClipping = true) override;
 };
 

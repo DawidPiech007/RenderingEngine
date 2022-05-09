@@ -14,7 +14,7 @@ public:
 	float shinines; // Ns
 	float transparency; // d
 
-	Material(std::string name);
+	Material(std::string name = "default");
 
 	void SetValue(float value, std::string type);
 	void SetValue(LightIntensity value, std::string type);

@@ -61,6 +61,9 @@
     <ClCompile Include="AmbientLight.cpp">
       <Filter>SourceFiles\Light</Filter>
     </ClCompile>
+    <ClCompile Include="Intersection.cpp">
+      <Filter>SourceFiles\Rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -122,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="AmbientLight.h">
       <Filter>HeaderFiles\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Intersection.h">
+      <Filter>HeaderFiles\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

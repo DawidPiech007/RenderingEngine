@@ -1,31 +1,16 @@
 #include "Geometry.h"
-#include "Vector3.h"
 
-Geometry::Geometry() : baseColor(1.0f,1.0f,1.0f)
+Geometry::Geometry()
 {
+	material = new Material("default");
 }
 
-Geometry::Geometry(LightIntensity baseColor)
+Geometry::Geometry(Material& material)
 {
-	this->baseColor = baseColor;
+	this->material = &material;
 }
 
-std::vector<Vector3*> Geometry::IntersectPoints(Ray& ray)
-{
-	return std::vector<Vector3*>();
-}
-
-Vector3* Geometry::IntersectPoint(Ray& ray)
+Intersection* Geometry::GetIntersection(Ray& ray, bool backsidedClipping)
 {
 	return nullptr;
-}
-
-EIntersectType Geometry::Intersect(Ray& ray)
-{
-	return NONE;
-}
-
-LightIntensity Geometry::GetColor()
-{
-	return baseColor;
 }

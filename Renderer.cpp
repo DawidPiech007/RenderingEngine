@@ -144,32 +144,32 @@ LightIntensity Renderer::GetColorByAntyalizing(vector<Geometry*> objects, std::v
 
 LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel)
 {
-    Vector3* intersectPoint = new Vector3();
-    vector<Vector3*> intersectPoints;
-    for (int k = 0; k < objects.size(); k++)
-    {
-        intersectPoints.push_back(objects[k]->IntersectPoint(ray));
-    }
+    Intersection* retIntersection = nullptr;
+	vector<Intersection*> intersections;
+	for (int k = 0; k < objects.size(); k++)
+	{
+		intersections.push_back(objects[k]->GetIntersection(ray, true));
+	}
 
     // find object clostes to camera
     int indexMin = -1;
     float distanceMin = std::numeric_limits<float>::max();
     for (int k = 0; k < objects.size(); k++)
     {
-        if (intersectPoints[k] != nullptr)
+        if (intersections[k] != nullptr)
         {
-            float distance = (camera->GetPosition() - *intersectPoints[k]).SqrMagnitude();
+            float distance = (camera->GetPosition() - intersections[k]->point).SqrMagnitude();
             if (distance < distanceMin)
             {
                 distanceMin = distance;
                 indexMin = k;
-                delete intersectPoint;
-                intersectPoint = new Vector3(intersectPoints[k]->x, intersectPoints[k]->y, intersectPoints[k]->z);
+                delete retIntersection;
+                retIntersection = new Intersection(intersections[k]->point, intersections[k]->normal);
             }
-            delete intersectPoints[k]; // delate pointer
+            delete intersections[k]; // delate pointer
         }
     }
-    intersectPoints.clear();
+    intersections.clear();
 
     // add color
     if (indexMin != -1) {
@@ -178,18 +178,17 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         for (int i = 0; i < lights.size(); i++)
         {
-            if (lights[i]->IsInShadow(*intersectPoint, camera, objects) == false)
-            {                                                                       //  ===========================================  //
-                outColor += lights[i]->CaculateColor(objects[indexMin]->material,   //                                               //
-                    *intersectPoint, Vector3(1.0f, 0.0f, 0.0f), camera);             //      NIE PRZEKAZUJE WEKTORA NORMALNEGO        //
-            }                                                                       //                                               //
-        }                                                                           //  ===========================================  //
+            if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
+            {                                                                     
+                outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera);            
+            }                                                                     
+        }                                                                         
 
         if (outColor.r > 1.0f)    outColor.r = 1.0f;
         if (outColor.g > 1.0f)    outColor.g = 1.0f;
         if (outColor.b > 1.0f)    outColor.b = 1.0f;
 
-        delete intersectPoint;
+        delete retIntersection;
 
         return outColor;
     }

@@ -10,13 +10,10 @@ public:
 	Vector3 center; // centrum
 	float radius;	// dlugosc promienia
 
-	Sphere(float cx, float cy, float cz, float r, LightIntensity color = LightIntensity(1.0f,1.0f,1.0f));
-	Sphere(Vector3 c, float r, LightIntensity color = LightIntensity(1.0f, 1.0f, 1.0f));
+	Sphere(float cx, float cy, float cz, float r);
+	Sphere(Vector3 c, float r);
 	Sphere();
 
-	std::vector<Vector3*> IntersectPoints(Ray& ray) override;
-	Vector3* IntersectPoint(Ray& ray) override;
-	EIntersectType Intersect(Ray& ray) override;
-
+	Intersection* GetIntersection(Ray& ray, bool backsidedClipping = true) override;
 };
 

@@ -12,10 +12,7 @@ public:
 	int tmpLastUsedTriangleIndex = 0;
 
 	Mesh();
-	Mesh(std::string path, LightIntensity baseColor);
 
-	Vector3* IntersectPoint(Ray& ray);
-
-	LightIntensity GetColor() override;
+	Intersection* GetIntersection(Ray& ray, bool backsidedClipping = true) override;
 };
 

@@ -103,7 +103,7 @@ void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geome
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[0] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
 						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1],
-						temp_uv[uvIndex[0] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1], tmpColor));
+						temp_uv[uvIndex[0] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1]));
 				}
 				else if (matches == 12)// siatka z czworok¹tów, zawiera uv
 				{
@@ -111,11 +111,11 @@ void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geome
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[0] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
 						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1],
-						temp_uv[uvIndex[0] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1], tmpColor));
+						temp_uv[uvIndex[0] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1]));
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[3] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
 						temp_normals[normalIndex[3] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1],
-						temp_uv[uvIndex[3] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1], tmpColor));
+						temp_uv[uvIndex[3] - 1], temp_uv[uvIndex[1] - 1], temp_uv[uvIndex[2] - 1]));
 				}
 				else // B³êdna siatka lub siatka bez Normalnych
 				{
@@ -135,10 +135,10 @@ void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geome
 
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[0] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
-						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1], tmpColor));
+						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1]));
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[3] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
-						temp_normals[normalIndex[3] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1], tmpColor));
+						temp_normals[normalIndex[3] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1]));
 				}
 				else if (matches == 6)// siatka z trójk¹tów, NIE zawiera uv
 				{
@@ -146,7 +146,7 @@ void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geome
 
 					meshs[meshID]->triangles.push_back(Triangle(
 						temp_positions[posIndex[0] - 1], temp_positions[posIndex[1] - 1], temp_positions[posIndex[2] - 1],
-						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1], tmpColor));
+						temp_normals[normalIndex[0] - 1], temp_normals[normalIndex[1] - 1], temp_normals[normalIndex[2] - 1]));
 				}
 				else // B³êdna siatka lub siatka bez Normalnych
 				{

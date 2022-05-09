@@ -152,6 +152,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraOrthographic.cpp" />
     <ClCompile Include="ICamera.cpp" />
+    <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightIntensity.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="CameraOrthographic.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="ICamera.h" />
+    <ClInclude Include="Intersection.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightIntensity.h" />
     <ClInclude Include="Material.h" />

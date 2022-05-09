@@ -3,6 +3,11 @@
 Material::Material(std::string name)
 {
 	this->name = name;
+	diffuse = LightIntensity(1.0f, 1.0f, 1.0f);
+	ambient = LightIntensity(1.0f, 1.0f, 1.0f);
+	specular = LightIntensity(1.0f, 1.0f, 1.0f);
+	shinines = 32.0f;
+	transparency = 1.0f;
 }
 
 void Material::SetValue(float value, std::string type)

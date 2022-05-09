@@ -26,43 +26,43 @@ PointLight::PointLight(LightIntensity color, Vector3 lightPos, float constAtten,
 	this->quadAtten = quadAtten;
 }
 
-LightIntensity PointLight::CaculateColor(Material* material, Vector3 position, Vector3 normal, ICamera* camera)
+LightIntensity PointLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera)
 {
-	return material->diffuse * color;
+    return material->diffuse * color;
 }
 
-bool PointLight::IsInShadow(Vector3 position, ICamera* camera, std::vector<Geometry*> objects)
+bool PointLight::IsInShadow(Intersection intersection, ICamera* camera, std::vector<Geometry*> objects)
 {
     //Ray ray = Ray(position, position- lightPos);
-    Ray ray = Ray(position, lightPos - position);
+    Ray ray = Ray(intersection.point + intersection.normal * TRIANGLE_OFFSET, lightPos - intersection.point);
 
-    vector<Vector3*> intersectPoints;
+    vector<Intersection*> intersections;
     for (int k = 0; k < objects.size(); k++)
     {
-        intersectPoints.push_back(objects[k]->IntersectPoint(ray));
+        intersections.push_back(objects[k]->GetIntersection(ray, false));
     }
 
-    // find object clostes to camera
+    // find object clostes to ray origin
     int indexMin = -1;
-    float distanceMin = (lightPos - position).Magnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
+    float distanceMin = (lightPos - intersection.point).Magnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
 
     for (int k = 0; k < objects.size(); k++)
     {
-        if (intersectPoints[k] != nullptr)
+        if (intersections[k] != nullptr)
         {
-            float distance = (camera->GetPosition() - *intersectPoints[k]).Magnitude();
-            if (distance < distanceMin/* && distance> MIN_DISTANCE*/)
+            float distance = (ray.origin - intersections[k]->point).Magnitude();
+            if (distance < distanceMin)
             {
                 distanceMin = distance;
                 indexMin = k;
             }
-            delete intersectPoints[k]; // delate pointer
+            delete intersections[k]; // delate pointer
         }
     }
-    intersectPoints.clear();
+    intersections.clear();
 
     if (indexMin == -1)
-	    return false;
+        return false;
 
     return true;
 }

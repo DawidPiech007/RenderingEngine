@@ -43,6 +43,7 @@ public:
 
     static Vector3 Cross(const Vector3& a, const Vector3& b);
     static float Dot(const Vector3& a, const Vector3& b);
+    static Vector3 Reflect(const Vector3& incidentVec, const Vector3& normal);
     
     static float Magnitude(const Vector3& a);
     static float SqrMagnitude(const Vector3& a);

@@ -3,6 +3,7 @@
 #include "Geometry.h"
 #include "Ray.h"
 #include "Camera.h"
+#include "Renderer.h"
 #include <vector>
 #include <iostream>
 
@@ -28,6 +29,32 @@ PointLight::PointLight(LightIntensity color, Vector3 lightPos, float constAtten,
 
 LightIntensity PointLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera)
 {
+    LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
+
+    Vector3 dir = (intersection.point - lightPos).Normalize();
+
+    //diffuse
+    float kd = Vector3::Dot(intersection.normal, -dir);
+    if (kd < 0.0f)
+        kd = 0.0f;
+
+    //specular
+    Vector3 viewDir = (RENDERER.GetCanera()->GetPosition() - intersection.point).Normalize();
+    Vector3 reflectDir = Vector3::Reflect(dir, intersection.normal);
+    float ks = Vector3::Dot(viewDir, reflectDir);
+    if (ks < 0)
+        ks = 0.0f;
+    else
+        ks = pow(ks, material->shinines);
+
+    outColor += material->diffuse * kd + material->specular * ks;
+
+    if (outColor.r > 1.0f)    outColor.r = 1.0f;
+    if (outColor.g > 1.0f)    outColor.g = 1.0f;
+    if (outColor.b > 1.0f)    outColor.b = 1.0f;
+
+    return outColor;
+
     return material->diffuse * color;
 }
 

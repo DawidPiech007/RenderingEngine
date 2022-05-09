@@ -89,6 +89,11 @@ float Vector3::Dot(const Vector3& a, const Vector3& b)
 	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
+Vector3 Vector3::Reflect(const Vector3& incidentVec, const Vector3& normal)
+{
+	return incidentVec - (normal * 2.0f * Dot(incidentVec, normal));
+}
+
 float Vector3::Magnitude(const Vector3& a)
 {
 	return sqrtf((a.x * a.x) + (a.y * a.y) + (a.z * a.z));

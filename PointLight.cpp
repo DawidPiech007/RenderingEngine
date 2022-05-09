@@ -39,7 +39,9 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
         kd = 0.0f;
 
     //specular
-    Vector3 viewDir = (RENDERER.GetCanera()->GetPosition() - intersection.point).Normalize();
+    Vector3 viewDir = RENDERER.GetCanera()->GetPosition() - intersection.point;
+    float distance = viewDir.Magnitude();
+    viewDir = viewDir.Normalize();
     Vector3 reflectDir = Vector3::Reflect(dir, intersection.normal);
     float ks = Vector3::Dot(viewDir, reflectDir);
     if (ks < 0)
@@ -48,6 +50,10 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
         ks = pow(ks, material->shinines);
 
     outColor += material->diffuse * kd + material->specular * ks;
+
+    float atten = 1.0f / (constAtten + distance * linearAtten + distance * distance * quadAtten);
+    //cout << atten << endl;
+    outColor *= atten;
 
     if (outColor.r > 1.0f)    outColor.r = 1.0f;
     if (outColor.g > 1.0f)    outColor.g = 1.0f;

@@ -11,6 +11,7 @@ public:
 	float radius;	// dlugosc promienia
 
 	Sphere(float cx, float cy, float cz, float r);
+	Sphere(Vector3 c, float r, Material* material);
 	Sphere(Vector3 c, float r);
 	Sphere();
 

@@ -4,19 +4,26 @@
 
 using namespace std;
 
-Sphere::Sphere(float cx, float cy, float cz, float r) : Geometry()
+Sphere::Sphere(float cx, float cy, float cz, float r)
 {
 	this->center = Vector3(cx, cy, cz);
 	this->radius = r;
 }
 
-Sphere::Sphere(Vector3 c, float r) : Geometry()
+Sphere::Sphere(Vector3 c, float r, Material* material)
+{
+	this->center = c;
+	this->radius = r;
+	this->material = material;
+}
+
+Sphere::Sphere(Vector3 c, float r) 
 {
 	this->center = c;
 	this->radius = r;
 }
 
-Sphere::Sphere() : Geometry()
+Sphere::Sphere()
 {
 	this->center = Vector3();
 	this->radius = 0;

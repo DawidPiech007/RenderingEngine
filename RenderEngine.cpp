@@ -31,7 +31,7 @@ int main()
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     camera->SetFOV(80);
-    camera->position = Vector3(.0f, .0f,  -12.5f);
+    camera->position = Vector3(.4f, .0f,  -12.5f);
     CameraOrthographic* orthographic = new CameraOrthographic();
     RENDERER.SetUp(*buffer, *camera, 0.49); // 1/2 - 0.01 czyli rekurencja pójdzie 3 razy w dół
 

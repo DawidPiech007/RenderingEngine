@@ -31,7 +31,9 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
 {
     LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
 
-    Vector3 dir = (intersection.point - lightPos).Normalize();
+    Vector3 dir = intersection.point - lightPos;
+    float distance = dir.Magnitude();
+    dir = dir.Normalize();
 
     //diffuse
     float kd = Vector3::Dot(intersection.normal, -dir);
@@ -40,7 +42,6 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
 
     //specular
     Vector3 viewDir = RENDERER.GetCanera()->GetPosition() - intersection.point;
-    float distance = viewDir.Magnitude();
     viewDir = viewDir.Normalize();
     Vector3 reflectDir = Vector3::Reflect(dir, intersection.normal);
     float ks = Vector3::Dot(viewDir, reflectDir);

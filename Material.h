@@ -3,6 +3,7 @@
 #include <string>
 
 #include "LightIntensity.h"
+#include "Texture.h"
 
 class Material
 {
@@ -13,8 +14,9 @@ public:
 	LightIntensity specular; // Ks
 	float shinines; // Ns
 	float transparency; // d
+	Texture* texture;
 
-	Material(std::string name = "default");
+	Material(std::string name = "default", Texture* texture = nullptr);
 
 	void SetValue(float value, std::string type);
 	void SetValue(LightIntensity value, std::string type);

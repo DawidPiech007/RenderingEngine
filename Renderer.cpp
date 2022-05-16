@@ -182,7 +182,17 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             {                                                                     
                 outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera);            
             }                                                                     
-        }                                                                         
+        }
+        
+        float u = (retIntersection->point.z + 2 ) / 2.f;
+        float v = (retIntersection->point.x + 1 ) / 2.f;
+        int col = (int)(399 * u);
+        int row = (int)(399 * v);
+        //std::cout << v<< "\n";
+        
+        outColor += objects[indexMin]->material->texture->GetColor(col, row);
+        //std::cout << retIntersection->point.ToString()<< "\n";
+        //outColor +=
 
         if (outColor.r > 1.0f)    outColor.r = 1.0f;
         if (outColor.g > 1.0f)    outColor.g = 1.0f;

@@ -64,6 +64,9 @@
     <ClCompile Include="Intersection.cpp">
       <Filter>SourceFiles\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3.h">
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="Intersection.h">
       <Filter>HeaderFiles\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>HeaderFiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

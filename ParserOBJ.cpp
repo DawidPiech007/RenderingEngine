@@ -176,6 +176,7 @@ void ParserOBJ::AddNewObjectsToVectorFromOBJ(std::string path, std::vector<Geome
 
 	for (int i = 0; i < meshs.size(); i++)
 	{
+		meshs[i]->SetUp();
 		objects.push_back(meshs[i]);
 	}
 }

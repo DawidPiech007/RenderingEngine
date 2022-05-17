@@ -4,6 +4,7 @@
 #include <vector>
 #include "Geometry.h"
 #include "Triangle.h"
+#include "Sphere.h"
 
 class Mesh : public Geometry
 {
@@ -11,8 +12,7 @@ public:
 	std::vector<Triangle> triangles;
 	int tmpLastUsedTriangleIndex = 0;
 
-	Vector3 center;
-	float r;
+	Sphere boundingSphere;
 
 	Mesh();
 

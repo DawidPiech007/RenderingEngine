@@ -176,21 +176,18 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         //return objects[indexMin]->GetColor();
         //return objects[indexMin]->material->diffuse;;
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
-        for (int i = 0; i < lights.size(); i++)
-        {
-            if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
-            {                                                                     
-                outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera);            
-            }                                                                     
-        }
+        // TODO BRING BACK LIGHTS
+        //for (int i = 0; i < lights.size(); i++)
+        //{
+        //    if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
+        //    {                                                                     
+        //        outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera);            
+        //    }                                                                     
+        //}
+
+        Texture texture = *objects[indexMin]->material->texture;
         
-        float u = (retIntersection->point.z + 2 ) / 2.f;
-        float v = (retIntersection->point.x + 1 ) / 2.f;
-        int col = (int)(399 * u);
-        int row = (int)(399 * v);
-        //std::cout << v<< "\n";
-        
-        outColor += objects[indexMin]->material->texture->GetColor(col, row);
+        outColor += texture.PlanarUV(retIntersection->point, objects[indexMin]->center);
         //std::cout << retIntersection->point.ToString()<< "\n";
         //outColor +=
 

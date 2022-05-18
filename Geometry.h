@@ -4,14 +4,13 @@
 #include "LightIntensity.h"
 #include "Material.h"
 #include "Intersection.h"
-
-// predekralacje klas 
-class Vector3;
-class Ray;
+#include "Ray.h"
+#include "Vector3.h"
 
 class Geometry
 {
 public:
+	Vector3 center;
 	Material* material;
 
 	Geometry();

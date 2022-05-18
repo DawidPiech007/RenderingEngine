@@ -10,10 +10,45 @@ using namespace std;
 Mesh::Mesh()
 {
 	triangles = vector<Triangle>();
+	Sphere boundingSphere;
+}
+
+void Mesh::SetUp()
+{
+	if (triangles.size() == 0)
+		return;
+
+	center = Vector3(0.0f, 0.0f, 0.0f);
+
+	for (int i = 0; i < triangles.size(); i++)
+	{
+		center += triangles[i].v1;
+		center += triangles[i].v2;
+		center += triangles[i].v3;
+	}
+
+	center *= 1 / triangles.size() * 3;
+	float r = 0;
+
+	for (int i = 0; i < triangles.size(); i++)
+	{
+		r = max((center, triangles[i].v1).Magnitude(), r);
+		r = max((center, triangles[i].v2).Magnitude(), r);
+		r = max((center, triangles[i].v3).Magnitude(), r);
+	}
+	boundingSphere = Sphere(center, r);
 }
 
 Intersection* Mesh::GetIntersection(Ray& ray, bool backsidedClipping)
 {
+	Intersection* sphereIntersection = boundingSphere.GetIntersection(ray, false);
+	if (sphereIntersection == nullptr)
+	{
+		delete sphereIntersection;
+		return nullptr;
+	}
+	delete sphereIntersection;
+
 	Intersection* retIntersection = nullptr;
 	vector<Intersection*> intersections;
 	for (int k = 0; k < triangles.size(); k++)

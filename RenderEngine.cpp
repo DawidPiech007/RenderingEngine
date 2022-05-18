@@ -33,8 +33,9 @@ int main()
     // ========== SETUP ==========
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
-    Texture* texture = new Texture("texture.png");
-    std::cout << texture->GetColor(0, 200).r << "\n";
+    stbi_set_flip_vertically_on_load(true);
+    Texture* texture = new Texture("UV.png", SPHERICAL);
+
     camera->SetFOV(80);
     camera->position = Vector3(.0f, .0f,  -9.5f);
     CameraOrthographic* orthographic = new CameraOrthographic();
@@ -50,7 +51,7 @@ int main()
     redMaterial->diffuse = LightIntensity(1.0f, 0.0f, 0.0f);
     redMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
     redMaterial->shinines = 32.0f;
-    Sphere* sph = new Sphere(Vector3(1.0f, 1.0f, -2.0f), 2.0f, redMaterial);
+    Sphere* sph = new Sphere(Vector3(1.0f, 1.0f, -6.0f), 1.0f, redMaterial);
     objects.push_back(sph);
     //std::cout << sph.center.ToString();
     //objects.push_back(new Sphere(Vector3(3.0f, -5.0f, 6.0f), 3.0f, redMaterial));
@@ -65,7 +66,7 @@ int main()
 
 
     // ========== DROW LIGHTS ==========
-    vector<Light*> fakeLights{ new AmbientLight(LightIntensity(1.0f, 1.0f, 1.0f)) };
+    vector<Light*> fakeLights{ new AmbientLight(LightIntensity(1.0f, 1.0f, 1.0f)) }; //TODO DELETE POINTERS
     Material* lightMaterial = new Material("lightMaterial",texture);
     lightMaterial->ambient = LightIntensity(1.0f, 1.0f, 1.0f);
     //vector<Geometry*> lightsObjects{ new Sphere(Vector3(-1.0f, 0.0f, -10.0f), 0.2f, lightMaterial)

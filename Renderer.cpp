@@ -187,7 +187,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 
         Texture texture = *objects[indexMin]->material->texture;
         
-        outColor += texture.PlanarUV(retIntersection->point, objects[indexMin]->center);
+        outColor += texture.WrapTexture(retIntersection->point, objects[indexMin]->center);
         //std::cout << retIntersection->point.ToString()<< "\n";
         //outColor +=
 

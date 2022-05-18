@@ -61,8 +61,6 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
     if (outColor.b > 1.0f)    outColor.b = 1.0f;
 
     return outColor;
-
-    return material->diffuse * color;
 }
 
 bool PointLight::IsInShadow(Intersection intersection, ICamera* camera, std::vector<Geometry*> objects)

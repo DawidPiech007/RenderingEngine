@@ -7,7 +7,7 @@
 class Sphere: public Geometry
 {
 public:
-	Vector3 center; // centrum
+	//Vector3 center; // centrum
 	float radius;	// dlugosc promienia
 
 	Sphere(float cx, float cy, float cz, float r);

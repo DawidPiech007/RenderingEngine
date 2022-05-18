@@ -11,12 +11,10 @@ class Mesh : public Geometry
 public:
 	std::vector<Triangle> triangles;
 	int tmpLastUsedTriangleIndex = 0;
-
 	Sphere boundingSphere;
 
-	Mesh();
-
 	void SetUp();
+	Mesh();
 
 	Intersection* GetIntersection(Ray& ray, bool backsidedClipping = true) override;
 };

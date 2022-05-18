@@ -1,6 +1,6 @@
 #include "Material.h"
 
-Material::Material(std::string name)
+Material::Material(std::string name, Texture* texture)
 {
 	this->name = name;
 	diffuse = LightIntensity(1.0f, 1.0f, 1.0f);
@@ -8,6 +8,9 @@ Material::Material(std::string name)
 	specular = LightIntensity(1.0f, 1.0f, 1.0f);
 	shinines = 32.0f;
 	transparency = 1.0f;
+
+	if (texture != nullptr)
+		this->texture = texture;
 }
 
 void Material::SetValue(float value, std::string type)

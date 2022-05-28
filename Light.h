@@ -16,6 +16,6 @@ class Light
 public:
 	LightIntensity color;
 
-	virtual LightIntensity CaculateColor(Material* material, Intersection intersection,ICamera* camera);
+	virtual LightIntensity CaculateColor(Material* material, Intersection intersection,ICamera* camera, LightIntensity textureColor);
 	virtual bool IsInShadow(Intersection intersection, ICamera* camera, std::vector<Geometry*> objects);
 };

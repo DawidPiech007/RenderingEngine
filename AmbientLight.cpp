@@ -13,9 +13,10 @@ AmbientLight::AmbientLight(LightIntensity color)
 	this->color = color;
 }
 
-LightIntensity AmbientLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera)
+LightIntensity AmbientLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera, LightIntensity textureColor)
 {
-	return material->ambient * color;
+
+	return material->ambient * color * textureColor;
 }
 
 bool AmbientLight::IsInShadow(Intersection intersection, ICamera* camera, std::vector<Geometry*> objects)

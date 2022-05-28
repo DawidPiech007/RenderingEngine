@@ -31,7 +31,7 @@ using namespace std;
 int main()
 {
     // ========== SETUP ==========
-    Buffer* buffer = new Buffer(400, 400);
+    Buffer* buffer = new Buffer(100, 100);
     Camera* camera = new Camera();
     stbi_set_flip_vertically_on_load(true);
     Texture* texture = new Texture("UV.png", SPHERICAL);
@@ -44,21 +44,23 @@ int main()
     // ========== DROW SCENE ==========
     vector<Geometry*> objects{};
     ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey.obj", objects);
+    
     objects[0]->material->texture = texture;
 
     Material* redMaterial = new Material("redMaterial", texture);
-    redMaterial->ambient = LightIntensity(1.0f, 0.0f, 0.0f);
-    redMaterial->diffuse = LightIntensity(1.0f, 0.0f, 0.0f);
+    objects[0]->material = redMaterial;
+    redMaterial->ambient = LightIntensity(0.2f, 0.2f, 0.2f);
+    redMaterial->diffuse = LightIntensity(0.7f, 0.7f, 0.7f);
     redMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
-    redMaterial->shinines = 32.0f;
-    Sphere* sph = new Sphere(Vector3(1.0f, 1.0f, -6.0f), 1.0f, redMaterial);
+    redMaterial->shinines = 8.0f;
+    Sphere* sph = new Sphere(Vector3(1.2f, -1.6f, -3.0f), 1.0f, redMaterial);
     objects.push_back(sph);
     //std::cout << sph.center.ToString();
     //objects.push_back(new Sphere(Vector3(3.0f, -5.0f, 6.0f), 3.0f, redMaterial));
 
-    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-1.0f, 0.0f, -10.0f), 1.0f, 0.045f, 0.0075f),
-                           //new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(1.0f, 0.0f, -6.0f), 1.0f, 0.001f, 0.002f),
-                           new AmbientLight(LightIntensity(0.05f, 0.05f, 0.1f))};
+    vector<Light*> lights{ //new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(6.0f, 0.0f, -15.0f), 1.0f, 0.045f, 0.0075f),
+                           new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-2.0f, 0.0f, -8.0f), 1.0f, 0.045f, 0.0075f),
+                           new AmbientLight(LightIntensity(0.5f, 0.5f, 0.5f))};
 
     buffer->FillColor(0.0f, 0.0f, 0.0f);
     RENDERER.Render(objects, lights);

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-LightIntensity Light::CaculateColor(Material* material, Intersection intersection, ICamera* camera)
+LightIntensity Light::CaculateColor(Material* material, Intersection intersection, ICamera* camera, LightIntensity textureColor)
 {
 	return LightIntensity();
 }

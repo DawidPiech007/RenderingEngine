@@ -176,20 +176,23 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         //return objects[indexMin]->GetColor();
         //return objects[indexMin]->material->diffuse;;
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
-        // TODO BRING BACK LIGHTS
-        //for (int i = 0; i < lights.size(); i++)
-        //{
-        //    if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
-        //    {                                                                     
-        //        outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera);            
-        //    }                                                                     
-        //}
+        LightIntensity textureColor = LightIntensity(0.0f, 0.0f, 0.0f);
 
         Texture texture = *objects[indexMin]->material->texture;
-        
-        outColor += texture.WrapTexture(retIntersection->point, objects[indexMin]->center);
-        //std::cout << retIntersection->point.ToString()<< "\n";
-        //outColor +=
+
+        textureColor += texture.WrapTexture(retIntersection->point, objects[indexMin]->center);
+
+        if (textureColor.r > 1.0f)    textureColor.r = 1.0f;
+        if (textureColor.g > 1.0f)    textureColor.g = 1.0f;
+        if (textureColor.b > 1.0f)    textureColor.b = 1.0f;
+
+        for (int i = 0; i < lights.size(); i++)
+        {
+            if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
+            {                                                                     
+                outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera, textureColor);            
+            }                                                                     
+        }
 
         if (outColor.r > 1.0f)    outColor.r = 1.0f;
         if (outColor.g > 1.0f)    outColor.g = 1.0f;

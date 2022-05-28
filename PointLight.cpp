@@ -27,7 +27,7 @@ PointLight::PointLight(LightIntensity color, Vector3 lightPos, float constAtten,
 	this->quadAtten = quadAtten;
 }
 
-LightIntensity PointLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera)
+LightIntensity PointLight::CaculateColor(Material* material, Intersection intersection, ICamera* camera, LightIntensity textureColor)
 {
     LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
 
@@ -50,7 +50,7 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
     else
         ks = pow(ks, material->shinines);
 
-    outColor += material->diffuse * kd + material->specular * ks;
+    outColor += material->diffuse * kd * textureColor + material->specular * ks * textureColor;
 
     float atten = 1.0f / (constAtten + distance * linearAtten + distance * distance * quadAtten);
     //cout << atten << endl;

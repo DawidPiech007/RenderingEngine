@@ -31,7 +31,7 @@ using namespace std;
 int main()
 {
     // ========== SETUP ==========
-    Buffer* buffer = new Buffer(100, 100);
+    Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     stbi_set_flip_vertically_on_load(true);
     Texture* texture = new Texture("UV.png", SPHERICAL);

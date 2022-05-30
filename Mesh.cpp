@@ -41,13 +41,17 @@ void Mesh::SetUp()
 
 Intersection* Mesh::GetIntersection(Ray& ray, bool backsidedClipping)
 {
-	Intersection* sphereIntersection = boundingSphere.GetIntersection(ray, false);
-	if (sphereIntersection == nullptr)
+	if (backsidedClipping == true) // false tylko dla promieni do œwiat³a
 	{
+		Intersection* sphereIntersection = boundingSphere.GetIntersection(ray, false);
+		if (sphereIntersection == nullptr)
+		{
+			delete sphereIntersection;
+			return nullptr;
+		}
 		delete sphereIntersection;
-		return nullptr;
 	}
-	delete sphereIntersection;
+	
 
 	Intersection* retIntersection = nullptr;
 	vector<Intersection*> intersections;

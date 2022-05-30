@@ -66,7 +66,9 @@ LightIntensity PointLight::CaculateColor(Material* material, Intersection inters
 bool PointLight::IsInShadow(Intersection intersection, ICamera* camera, std::vector<Geometry*> objects)
 {
     //Ray ray = Ray(position, position- lightPos);
-    Ray ray = Ray(intersection.point + intersection.normal * TRIANGLE_OFFSET, lightPos - intersection.point);
+    Vector3 pointOffset = intersection.point + intersection.normal * TRIANGLE_OFFSET;
+
+    Ray ray = Ray(pointOffset, lightPos - pointOffset);
 
     vector<Intersection*> intersections;
     for (int k = 0; k < objects.size(); k++)
@@ -76,7 +78,7 @@ bool PointLight::IsInShadow(Intersection intersection, ICamera* camera, std::vec
 
     // find object clostes to ray origin
     int indexMin = -1;
-    float distanceMin = (lightPos - intersection.point).Magnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
+    float distanceMin = (lightPos - pointOffset).Magnitude(); // szukamy punktu przeciêcia w odleg³oœci mniejszej ni¿ odleg³oœæ od œwiat³a
 
     for (int k = 0; k < objects.size(); k++)
     {

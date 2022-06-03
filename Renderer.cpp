@@ -178,9 +178,10 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         LightIntensity textureColor = LightIntensity(0.0f, 0.0f, 0.0f);
 
-        Texture texture = *objects[indexMin]->material->texture;
-
-        textureColor += texture.WrapTexture(retIntersection->point, objects[indexMin]->center);
+        if (objects[indexMin]->material->texture != nullptr)
+            textureColor += objects[indexMin]->material->texture->WrapTexture(retIntersection->point, objects[indexMin]->center);
+        else
+            textureColor = LightIntensity(1.0f, 1.0f, 1.0f);
 
         if (textureColor.r > 1.0f)    textureColor.r = 1.0f;
         if (textureColor.g > 1.0f)    textureColor.g = 1.0f;

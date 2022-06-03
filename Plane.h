@@ -11,6 +11,7 @@ public:
 	Vector3 normal;
 
 	Plane(Vector3 point, Vector3 normal);
+	Plane(Vector3 point, Vector3 normal, Material* material);
 
 	Intersection* GetIntersection(Ray& ray, bool backsidedClipping = true) override;
 };

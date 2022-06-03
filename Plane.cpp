@@ -5,6 +5,13 @@
 
 Plane::Plane(Vector3 point, Vector3 normal) : point(point), normal(normal) {}
 
+Plane::Plane(Vector3 point, Vector3 normal, Material* material)
+{
+	this->point = point;
+	this->normal = normal;
+	this->material = material;
+}
+
 Intersection* Plane::GetIntersection(Ray& ray, bool backsidedClipping)
 {
 	// TODO: zaimplementowaæ backsidedClipping

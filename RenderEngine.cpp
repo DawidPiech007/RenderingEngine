@@ -34,7 +34,6 @@ int main()
     Buffer* buffer = new Buffer(400, 400);
     Camera* camera = new Camera();
     stbi_set_flip_vertically_on_load(true);
-    Texture* texture = new Texture("UV.png", SPHERICAL);
 
     camera->SetFOV(80);
     camera->position = Vector3(.0f, .0f,  -9.5f);
@@ -42,35 +41,47 @@ int main()
     RENDERER.SetUp(*buffer, *camera, 0.49); // 1/2 - 0.01 czyli rekurencja pójdzie 3 razy w dół
 
     // ========== DROW SCENE ==========
-    vector<Geometry*> objects{};
-    ParserOBJ::AddNewObjectsToVectorFromOBJ("monkey.obj", objects);
-    
-    objects[0]->material->texture = texture;
+    Texture* texture = new Texture("UV.png", SPHERICAL);
 
-    Material* redMaterial = new Material("redMaterial", texture);
-    objects[0]->material = redMaterial;
-    redMaterial->ambient = LightIntensity(0.2f, 0.2f, 0.2f);
-    redMaterial->diffuse = LightIntensity(0.7f, 0.7f, 0.7f);
-    redMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
-    redMaterial->shinines = 8.0f;
-    Sphere* sph = new Sphere(Vector3(1.2f, -1.6f, -3.0f), 1.0f, redMaterial);
-    objects.push_back(sph);
-    //std::cout << sph.center.ToString();
-    //objects.push_back(new Sphere(Vector3(3.0f, -5.0f, 6.0f), 3.0f, redMaterial));
+    Material* texturedMaterial = new Material("texturedMaterial", texture);
+    texturedMaterial->ambient = LightIntensity(0.1f, 0.1f, 0.1f);
+    texturedMaterial->diffuse = LightIntensity(0.7f, 0.7f, 0.7f);
+    texturedMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
+    texturedMaterial->shinines = 8.0f;
 
-    vector<Light*> lights{ //new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(6.0f, 0.0f, -15.0f), 1.0f, 0.045f, 0.0075f),
-                           new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(-2.0f, 0.0f, -8.0f), 1.0f, 0.045f, 0.0075f),
+    Material* blueMaterial = new Material("blueMaterial");
+    blueMaterial->ambient = LightIntensity(0.0f, 0.0f, 0.1f);
+    blueMaterial->diffuse = LightIntensity(0.0f, 0.0f, 1.0f);
+    blueMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
+    blueMaterial->shinines = 8.0f;
+
+    Material* whiteMaterial = new Material("whiteMaterial");
+    whiteMaterial->ambient = LightIntensity(0.2f, 0.2f, 0.2f);
+    whiteMaterial->diffuse = LightIntensity(1.0f, 1.0f, 1.0f);
+    whiteMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
+    whiteMaterial->shinines = 8.0f;
+
+    Material* reflectMaterial = new Material("whiteMaterial", MaterialType::Reflect);
+
+    vector<Geometry*> objects{ new Plane(Vector3(5.0f, 0.0f, 0.0f), Vector3(-1.0f, 0.0f, 0.0f), texturedMaterial),
+        new Plane(Vector3(-5.0f, 0.0f, 0.0f), Vector3(1.0f, 0.0f, 0.0f), texturedMaterial),
+        new Plane(Vector3(0.0f, 0.0f, 5.0f), Vector3(0.0f, 0.0f, -1.0f),whiteMaterial),
+        /*new Plane(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 1.0f),whiteMaterial),*/
+        new Plane(Vector3(0.0f, 5.0f, 0.0f), Vector3(0.0f, -1.0f, 0.0f),whiteMaterial),
+        new Plane(Vector3(0.0f, -5.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f),blueMaterial),
+        new Sphere(Vector3(-1.0f, -3.5f, 1.0f), 1.5f, texturedMaterial),
+        new Sphere(Vector3(1.0f, -3.5f, 3.0f), 1.5f, reflectMaterial)};
+
+    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 4.5f, 0.0f), 1.0f, 0.045f, 0.0075f),
                            new AmbientLight(LightIntensity(0.5f, 0.5f, 0.5f))};
 
     buffer->FillColor(0.0f, 0.0f, 0.0f);
     RENDERER.Render(objects, lights);
-    //RENDERER.RenderNoAntiAliasing(objects, lights);
-
 
     // ========== DROW LIGHTS ==========
-    vector<Light*> fakeLights{ new AmbientLight(LightIntensity(1.0f, 1.0f, 1.0f)) }; //TODO DELETE POINTERS
-    Material* lightMaterial = new Material("lightMaterial",texture);
-    lightMaterial->ambient = LightIntensity(1.0f, 1.0f, 1.0f);
+    //vector<Light*> fakeLights{ new AmbientLight(LightIntensity(1.0f, 1.0f, 1.0f)) }; //TODO DELETE POINTERS
+    //Material* lightMaterial = new Material("lightMaterial",texture);
+    //lightMaterial->ambient = LightIntensity(1.0f, 1.0f, 1.0f);
     //vector<Geometry*> lightsObjects{ new Sphere(Vector3(-1.0f, 0.0f, -10.0f), 0.2f, lightMaterial)
                                     //, new Sphere(Vector3(1.0f, 0.0f, -6.0f), 0.2f, lightMaterial) 
      //                               };
@@ -82,7 +93,7 @@ int main()
     char const* filename = "testPerspective.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
-    delete camera, orthographic, buffer, RENDERER , lightMaterial, texture, redMaterial;
+    delete camera, orthographic, buffer, RENDERER , /*lightMaterial,*/ texture, texturedMaterial, blueMaterial, whiteMaterial;
 
     for (Geometry* g : objects)
     {

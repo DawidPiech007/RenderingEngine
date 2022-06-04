@@ -142,8 +142,12 @@ LightIntensity Renderer::GetColorByAntyalizing(vector<Geometry*> objects, std::v
     return outColor * 0.25f; //  outColor / 4
 }
 
-LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel)
+LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel, int rayDepth)
 {
+    // jeœli scie¿ka promieni jest za d³uga
+    if (rayDepth >= maxReyPath)
+        return LightIntensity(0.0f, 0.0f, 0.0f);
+
     Intersection* retIntersection = nullptr;
 	vector<Intersection*> intersections;
 	for (int k = 0; k < objects.size(); k++)
@@ -173,31 +177,44 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 
     // add color
     if (indexMin != -1) {
-        //return objects[indexMin]->GetColor();
-        //return objects[indexMin]->material->diffuse;;
+
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
-        LightIntensity textureColor = LightIntensity(0.0f, 0.0f, 0.0f);
+        LightIntensity textureColor;
+        Ray reflectRay;
 
-        if (objects[indexMin]->material->texture != nullptr)
-            textureColor += objects[indexMin]->material->texture->WrapTexture(retIntersection->point, objects[indexMin]->center);
-        else
-            textureColor = LightIntensity(1.0f, 1.0f, 1.0f);
-
-        if (textureColor.r > 1.0f)    textureColor.r = 1.0f;
-        if (textureColor.g > 1.0f)    textureColor.g = 1.0f;
-        if (textureColor.b > 1.0f)    textureColor.b = 1.0f;
-
-        for (int i = 0; i < lights.size(); i++)
+        switch (objects[indexMin]->material->type)
         {
-            if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
-            {                                                                     
-                outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera, textureColor);            
-            }                                                                     
-        }
+        case MaterialType::Reflect:
+            reflectRay = Ray(retIntersection->point, Vector3::Reflect(ray.direction, retIntersection->normal));
+            outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
+            break;
+        case MaterialType::Diffuse:
+            textureColor = LightIntensity(0.0f, 0.0f, 0.0f);
 
-        if (outColor.r > 1.0f)    outColor.r = 1.0f;
-        if (outColor.g > 1.0f)    outColor.g = 1.0f;
-        if (outColor.b > 1.0f)    outColor.b = 1.0f;
+            if (objects[indexMin]->material->texture != nullptr)
+                textureColor += objects[indexMin]->material->texture->WrapTexture(retIntersection->point, objects[indexMin]->center);
+            else
+                textureColor = LightIntensity(1.0f, 1.0f, 1.0f);
+
+            if (textureColor.r > 1.0f)    textureColor.r = 1.0f;
+            if (textureColor.g > 1.0f)    textureColor.g = 1.0f;
+            if (textureColor.b > 1.0f)    textureColor.b = 1.0f;
+
+            for (int i = 0; i < lights.size(); i++)
+            {
+                if (lights[i]->IsInShadow(*retIntersection, camera, objects) == false)
+                {
+                    outColor += lights[i]->CaculateColor(objects[indexMin]->material, *retIntersection, camera, textureColor);
+                }
+            }
+
+            if (outColor.r > 1.0f)    outColor.r = 1.0f;
+            if (outColor.g > 1.0f)    outColor.g = 1.0f;
+            if (outColor.b > 1.0f)    outColor.b = 1.0f;
+            break;
+        default:
+            break;
+        }
 
         delete retIntersection;
 

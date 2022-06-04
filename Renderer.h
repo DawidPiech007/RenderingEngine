@@ -36,10 +36,12 @@ public:
 
 	ICamera* GetCanera();
 
+	int maxReyPath = 10;
+
 private:
 	LightIntensity GetColorByAntyalizing(std::vector<Geometry*> objects, std::vector<Light*> lights, float xMin, float xMax, float yMin, float yMax,
 		int xPixel, int yPixel, float weight, std::vector<LightIntensity*> colors);
 
-	LightIntensity GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel);
+	LightIntensity GetColorByRay(std::vector<Geometry*> objects, std::vector<Light*> lights, Ray& ray, int xPixel, int yPixel, int rayDepth = 0);
 
 };

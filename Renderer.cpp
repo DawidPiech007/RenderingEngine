@@ -146,7 +146,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 {
     // jeœli scie¿ka promieni jest za d³uga
     if (rayDepth >= maxReyPath)
-        return LightIntensity(0.0f, 0.0f, 0.0f);
+        return LightIntensity(1.0f, 0.0f, 0.0f);
 
     Intersection* retIntersection = nullptr;
 	vector<Intersection*> intersections;
@@ -177,15 +177,29 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 
     // add color
     if (indexMin != -1) {
-
+        //0.65
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         LightIntensity textureColor;
         Ray reflectRay;
+        float nI = 1.005f;
+        float nT = 1.1f;
+        float n = nI / nT;
+
+        float dot = Vector3::Dot(retIntersection->normal, ray.direction);
+        float dotSquare = Vector3::Dot(retIntersection->normal, ray.direction) * Vector3::Dot(retIntersection->normal, ray.direction);
+
+        Vector3 afc = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
+        Vector3 startPoint = retIntersection->point - retIntersection->normal * 0.1f;
 
         switch (objects[indexMin]->material->type)
         {
         case MaterialType::Reflect:
             reflectRay = Ray(retIntersection->point, Vector3::Reflect(ray.direction, retIntersection->normal));
+            outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
+            break;
+        case MaterialType::Refract:
+            
+            reflectRay = Ray(startPoint, afc);
             outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
             break;
         case MaterialType::Diffuse:

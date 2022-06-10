@@ -62,6 +62,7 @@ int main()
     whiteMaterial->shinines = 8.0f;
 
     Material* reflectMaterial = new Material("whiteMaterial", MaterialType::Reflect);
+    Material* refract = new Material("whiteMaterial", MaterialType::Refract);
 
     vector<Geometry*> objects{ new Plane(Vector3(5.0f, 0.0f, 0.0f), Vector3(-1.0f, 0.0f, 0.0f), texturedMaterial),
         new Plane(Vector3(-5.0f, 0.0f, 0.0f), Vector3(1.0f, 0.0f, 0.0f), texturedMaterial),
@@ -69,10 +70,11 @@ int main()
         /*new Plane(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 1.0f),whiteMaterial),*/
         new Plane(Vector3(0.0f, 5.0f, 0.0f), Vector3(0.0f, -1.0f, 0.0f),whiteMaterial),
         new Plane(Vector3(0.0f, -5.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f),blueMaterial),
-        new Sphere(Vector3(-1.0f, -3.5f, 1.0f), 1.5f, texturedMaterial),
-        new Sphere(Vector3(1.0f, -3.5f, 3.0f), 1.5f, reflectMaterial)};
+        new Sphere(Vector3(2.0f, -1.0f, -2.0f), 1.5f, reflectMaterial),
+        new Sphere(Vector3(-2.0f, -1.0f, -2.0f), 1.5f, refract)
+    };
 
-    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 4.5f, 0.0f), 1.0f, 0.045f, 0.0075f),
+    vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 4.5f, -7.0f), 1.0f, 0.045f, 0.0075f),
                            new AmbientLight(LightIntensity(0.5f, 0.5f, 0.5f))};
 
     buffer->FillColor(0.0f, 0.0f, 0.0f);
@@ -93,7 +95,7 @@ int main()
     char const* filename = "testPerspective.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
-    delete camera, orthographic, buffer, RENDERER , /*lightMaterial,*/ texture, texturedMaterial, blueMaterial, whiteMaterial;
+    delete camera, orthographic, buffer, RENDERER, /*lightMaterial,*/ texture, texturedMaterial, blueMaterial, whiteMaterial, refract, reflectMaterial;
 
     for (Geometry* g : objects)
     {

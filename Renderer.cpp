@@ -188,7 +188,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         float dot = Vector3::Dot(retIntersection->normal, ray.direction);
         float dotSquare = Vector3::Dot(retIntersection->normal, ray.direction) * Vector3::Dot(retIntersection->normal, ray.direction);
 
-        Vector3 afc = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
+        Vector3 refractRay = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
         Vector3 startPoint = retIntersection->point - retIntersection->normal * 0.1f;
 
         switch (objects[indexMin]->material->type)
@@ -199,7 +199,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             break;
         case MaterialType::Refract:
             
-            reflectRay = Ray(startPoint, afc);
+            reflectRay = Ray(startPoint, refractRay);
             outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
             break;
         case MaterialType::Diffuse:

@@ -146,7 +146,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 {
     // jeœli scie¿ka promieni jest za d³uga
     if (rayDepth >= maxReyPath)
-        return LightIntensity(1.0f, 0.0f, 0.0f);
+        return LightIntensity(0.0f, 0.0f, 0.0f);
 
     Intersection* retIntersection = nullptr;
 	vector<Intersection*> intersections;
@@ -183,8 +183,8 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         Ray reflectRay;
         Ray refractRay;
         Intersection* intersectionOut;
-        float nI = 1.005f;
-        float nT = 1.2f;
+        float nI = 1.0f;
+        float nT = 1.0f;
         float n = nI / nT;
 
         float dot = Vector3::Dot(retIntersection->normal, ray.direction);
@@ -192,17 +192,20 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
 
         Vector3 refractRayDir = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
         //Vector3 startPoint = retIntersection->point;
-        Vector3 startPoint = retIntersection->point + retIntersection->normal * 0.0001f;
+        Vector3 startPoint = retIntersection->point - retIntersection->normal.Normalize() * 0.001f;
 
 
         switch (objects[indexMin]->material->type)
         {
         case MaterialType::Reflect:
-            reflectRay = Ray(retIntersection->point, Vector3::Reflect(ray.direction, retIntersection->normal));
+            reflectRay = Ray(retIntersection->point + retIntersection->normal * 0.001f, Vector3::Reflect(ray.direction, retIntersection->normal));
             outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
             break;
         case MaterialType::Refract:
-            
+            //cout << "===============" << endl;
+            //cout << "ray:" << endl << ray.direction.ToString() << endl;
+            //cout << "normal:" << endl << retIntersection->normal.ToString() << endl;
+            //cout << "refractRayDir:" << endl << refractRayDir.ToString()<<endl;
             refractRay = Ray(startPoint, refractRayDir);
 
             intersectionOut = objects[indexMin]->GetIntersection(refractRay, false);
@@ -215,7 +218,7 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             dotSquare = Vector3::Dot(intersectionOut->normal, refractRay.direction) * Vector3::Dot(intersectionOut->normal, refractRay.direction);
 
             refractRayDir = intersectionOut->normal * ((1.0f/n) * dot - sqrt(1 - ((1.0f / n) * (1.0f / n)) * (1.0f - dotSquare))) - refractRay.direction * (1.0f / n);
-            startPoint = intersectionOut->point + intersectionOut->normal * 0.1f;
+            startPoint = intersectionOut->point + intersectionOut->normal * 0.001f;
 
             refractRay = Ray(startPoint, refractRayDir);
             

@@ -60,12 +60,14 @@ Intersection* Sphere::GetIntersection(Ray& ray, bool backsidedClipping)
 		float t1 = (-b - det) / (2 * a);
 		float t2 = (-b + det) / (2 * a);
 		if (t1 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
+		{
 			if (((t1 < t2) && (t2 >= 0)) || (t2 < 0))  // czy t1 jest bli¿ej
 			{
 				Vector3 point = Vector3(ray.RayStep(t1));
 				Vector3 normal = point - center;
 				return new Intersection(point, normal.Normalize());
 			}
+		}
 		else if (t2 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
 		{
 			Vector3 point = Vector3(ray.RayStep(t2));

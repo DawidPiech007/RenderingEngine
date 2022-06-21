@@ -70,8 +70,8 @@ int main()
         /*new Plane(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 1.0f),whiteMaterial),*/
         new Plane(Vector3(0.0f, 5.0f, 0.0f), Vector3(0.0f, -1.0f, 0.0f),whiteMaterial),
         new Plane(Vector3(0.0f, -5.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f),blueMaterial),
-        new Sphere(Vector3(2.0f, -1.0f, -2.0f), 1.5f, reflectMaterial),
-        new Sphere(Vector3(-2.0f, -1.0f, -2.0f), 1.5f, refract)
+        new Sphere(Vector3(2.0f, -1.0f, -2.0f), 1.5f, reflectMaterial)
+        //new Sphere(Vector3(-2.0f, -1.0f, -2.0f), 1.5f, refract)
     };
 
     vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 4.5f, -7.0f), 1.0f, 0.045f, 0.0075f),

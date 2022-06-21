@@ -181,15 +181,19 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
         LightIntensity outColor = LightIntensity(0.0f, 0.0f, 0.0f);
         LightIntensity textureColor;
         Ray reflectRay;
+        Ray refractRay;
+        Intersection* intersectionOut;
         float nI = 1.005f;
-        float nT = 1.1f;
+        float nT = 1.2f;
         float n = nI / nT;
 
         float dot = Vector3::Dot(retIntersection->normal, ray.direction);
         float dotSquare = Vector3::Dot(retIntersection->normal, ray.direction) * Vector3::Dot(retIntersection->normal, ray.direction);
 
-        Vector3 refractRay = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
-        Vector3 startPoint = retIntersection->point - retIntersection->normal * 0.1f;
+        Vector3 refractRayDir = retIntersection->normal * (n * dot - sqrt(1 - (n*n) * (1.0f - dotSquare))) - ray.direction * n;
+        //Vector3 startPoint = retIntersection->point;
+        Vector3 startPoint = retIntersection->point + retIntersection->normal * 0.0001f;
+
 
         switch (objects[indexMin]->material->type)
         {
@@ -199,8 +203,25 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             break;
         case MaterialType::Refract:
             
-            reflectRay = Ray(startPoint, refractRay);
-            outColor = GetColorByRay(objects, lights, reflectRay, xPixel, yPixel, rayDepth + 1);
+            refractRay = Ray(startPoint, refractRayDir);
+
+            intersectionOut = objects[indexMin]->GetIntersection(refractRay, false);
+
+            if(intersectionOut == nullptr)
+                return LightIntensity(1.0f, 0.0f, 0.0f);
+
+
+            dot = Vector3::Dot(intersectionOut->normal, refractRay.direction);
+            dotSquare = Vector3::Dot(intersectionOut->normal, refractRay.direction) * Vector3::Dot(intersectionOut->normal, refractRay.direction);
+
+            refractRayDir = intersectionOut->normal * ((1.0f/n) * dot - sqrt(1 - ((1.0f / n) * (1.0f / n)) * (1.0f - dotSquare))) - refractRay.direction * (1.0f / n);
+            startPoint = intersectionOut->point + intersectionOut->normal * 0.1f;
+
+            refractRay = Ray(startPoint, refractRayDir);
+            
+            delete intersectionOut;
+
+            outColor = GetColorByRay(objects, lights, refractRay, xPixel, yPixel, rayDepth + 1);
             break;
         case MaterialType::Diffuse:
             textureColor = LightIntensity(0.0f, 0.0f, 0.0f);

@@ -213,12 +213,13 @@ LightIntensity Renderer::GetColorByRay(std::vector<Geometry*> objects, std::vect
             if(intersectionOut == nullptr)
                 return LightIntensity(1.0f, 0.0f, 0.0f);
 
+            intersectionOut->normal = -intersectionOut->normal;
 
             dot = Vector3::Dot(intersectionOut->normal, refractRay.direction);
             dotSquare = Vector3::Dot(intersectionOut->normal, refractRay.direction) * Vector3::Dot(intersectionOut->normal, refractRay.direction);
 
             refractRayDir = intersectionOut->normal * ((1.0f/n) * dot - sqrt(1 - ((1.0f / n) * (1.0f / n)) * (1.0f - dotSquare))) - refractRay.direction * (1.0f / n);
-            startPoint = intersectionOut->point + intersectionOut->normal * 0.001f;
+            startPoint = intersectionOut->point - intersectionOut->normal * 0.001f;
 
             refractRay = Ray(startPoint, refractRayDir);
             

@@ -34,9 +34,9 @@ Intersection* Sphere::GetIntersection(Ray& ray, bool backsidedClipping)
 	Vector3 offset = ray.origin - center;
 
 	// jeœli promieñ zaczyna siê w sferze to nie zwracamy przeciêæ przy w³¹czonym backsidedClippingu
-	if (backsidedClipping)
-		if (offset.SqrMagnitude() < (radius * radius))
-			return nullptr;
+	//if (backsidedClipping)
+	//	if (offset.SqrMagnitude() < (radius * radius))
+	//		return nullptr;
 
 	Vector3 d2 = ray.direction * 2.0f;
 	float a = Vector3::Dot(ray.direction, ray.direction);
@@ -51,7 +51,7 @@ Intersection* Sphere::GetIntersection(Ray& ray, bool backsidedClipping)
 		{
 			Vector3 point = Vector3(ray.RayStep(t));
 			Vector3 normal = point - center;
-			return new Intersection(point, normal);
+			return new Intersection(point, normal.Normalize());
 		}
 	}
 	else if (det > 0) // dodatnia delta oznacza 2 przeciecia
@@ -60,19 +60,18 @@ Intersection* Sphere::GetIntersection(Ray& ray, bool backsidedClipping)
 		float t1 = (-b - det) / (2 * a);
 		float t2 = (-b + det) / (2 * a);
 		if (t1 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
-			if (t1 < t2) // czy t1 jest bli¿ej
+			if (((t1 < t2) && (t2 >= 0)) || (t2 < 0))  // czy t1 jest bli¿ej
 			{
 				Vector3 point = Vector3(ray.RayStep(t1));
 				Vector3 normal = point - center;
-				return new Intersection(point, normal);
+				return new Intersection(point, normal.Normalize());
 			}
-		if (t2 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
-			if (t2 < t1) // czy t2 jest bli¿ej
-			{
-				Vector3 point = Vector3(ray.RayStep(t2));
-				Vector3 normal = point - center;
-				return new Intersection(point, normal);
-			}
+		else if (t2 >= 0)// Czy punkt przeciecia jest po wlasciwej stronie polprostej
+		{
+			Vector3 point = Vector3(ray.RayStep(t2));
+			Vector3 normal = point - center;
+			return new Intersection(point, normal.Normalize());
+		}
 	}
 
 	return nullptr;

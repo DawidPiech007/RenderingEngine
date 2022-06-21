@@ -55,6 +55,13 @@ int main()
     blueMaterial->specular = LightIntensity(1.0f, 1.0f, 1.0f);
     blueMaterial->shinines = 8.0f;
 
+
+    Material* pink = new Material("pink");
+    pink->ambient = LightIntensity(0.1f, 0.01f, 0.06f);
+    pink->diffuse = LightIntensity(1, 0.019, 0.639);
+    pink->specular = LightIntensity(1.0f, 1.0f, 1.0f);
+    pink->shinines = 8.0f;
+
     Material* whiteMaterial = new Material("whiteMaterial");
     whiteMaterial->ambient = LightIntensity(0.2f, 0.2f, 0.2f);
     whiteMaterial->diffuse = LightIntensity(1.0f, 1.0f, 1.0f);
@@ -70,8 +77,8 @@ int main()
         /*new Plane(Vector3(0.0f, 0.0f, -5.0f), Vector3(0.0f, 0.0f, 1.0f),whiteMaterial),*/
         new Plane(Vector3(0.0f, 5.0f, 0.0f), Vector3(0.0f, -1.0f, 0.0f),whiteMaterial),
         new Plane(Vector3(0.0f, -5.0f, 0.0f), Vector3(0.0f, 1.0f, 0.0f),blueMaterial),
-        new Sphere(Vector3(2.0f, -1.0f, -2.0f), 1.5f, reflectMaterial),
-        new Sphere(Vector3(-2.0f, -1.0f, -2.0f), 1.5f, refract)
+        new Sphere(Vector3(-0.2f, -0.2f, 1.0f), 0.8f, pink),
+        new Sphere(Vector3(0.0f, -1.0f, -3.0f), 1.5f, refract)
     };
 
     vector<Light*> lights{ new PointLight(LightIntensity(1.0f,1.0f,1.0f), Vector3(0.0f, 4.5f, -7.0f), 1.0f, 0.045f, 0.0075f),
@@ -95,7 +102,7 @@ int main()
     char const* filename = "testPerspective.png";
     stbi_write_png(filename, buffer->width, buffer->height, comp, buffer->data, 0);
 
-    delete camera, orthographic, buffer, RENDERER, /*lightMaterial,*/ texture, texturedMaterial, blueMaterial, whiteMaterial, refract, reflectMaterial;
+    delete camera, orthographic, buffer, RENDERER, /*lightMaterial,*/ texture, texturedMaterial, blueMaterial, whiteMaterial, refract, reflectMaterial, pink;
 
     for (Geometry* g : objects)
     {
